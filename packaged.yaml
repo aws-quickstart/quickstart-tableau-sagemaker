@@ -1,0 +1,164 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Functions and API for connecting Tableau to SageMaker.
+Globals:
+  Function:
+    Runtime: python3.7
+    Timeout: 180
+Parameters:
+  DomainName:
+    Type: String
+    Description: Domain name for SageMaker API. (tableauapi.domain.com)
+  CertificateARN:
+    Type: String
+    Description: ARN of certificate attached to domain.
+  HostedZoneId:
+    Type: AWS::Route53::HostedZone::Id
+    Description: Route 53 Hosted Zone for your domain.
+  AuthDomain:
+    Type: String
+    Description: Domain prefix for Cognito User management hosted portal. (sagemakertableauconnectorauthorization)
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+      UserPoolName: SageMakerTableauAPIUsers
+      UsernameAttributes:
+      - email
+      AutoVerifiedAttributes:
+      - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+  UserPoolTokenClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+      - code
+      AllowedOAuthScopes:
+      - aws.cognito.signin.user.admin
+      - email
+      - openid
+      - phone
+      - profile
+      CallbackURLs:
+      - https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md
+      UserPoolId:
+        Ref: UserPool
+      GenerateSecret: false
+      SupportedIdentityProviders:
+      - COGNITO
+      ExplicitAuthFlows:
+      - USER_PASSWORD_AUTH
+    DependsOn: UserPool
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain:
+        Ref: AuthDomain
+      UserPoolId:
+        Ref: UserPool
+    DependsOn: UserPool
+  InfoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://hcalder-public-fileshare/fdf5362fa03d6b0403a046dd0cc9155a
+      Handler: lambda_function.lambda_handler
+      Events:
+        InfoGetRequest:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: SageMakerApi
+            Path: /info
+            Method: get
+  EvaluateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://hcalder-public-fileshare/06dd421ca04a31f8703242e4c984dad0
+      Handler: lambda_function.lambda_handler
+      Policies:
+      - AmazonSageMakerFullAccess
+      Events:
+        EvaluatePostRequest:
+          Type: Api
+          Properties:
+            Auth:
+              Authorizer:
+                Ref: LambdaRequestAuthorizer
+            RestApiId:
+              Ref: SageMakerApi
+            Path: /evaluate
+            Method: post
+  SageMakerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Auth:
+        Authorizers:
+          LambdaRequestAuthorizer:
+            FunctionPayloadType: REQUEST
+            FunctionArn:
+              Fn::GetAtt:
+              - BasicAuthFunction
+              - Arn
+            Identity:
+              Headers:
+              - Authorization
+      StageName: prod
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: s3://hcalder-public-fileshare/26d7d0065d208e4941b2df993eab1693
+      Domain:
+        CertificateArn:
+          Ref: CertificateARN
+        DomainName:
+          Ref: DomainName
+        EndpointConfiguration: EDGE
+        Route53:
+          HostedZoneId:
+            Ref: HostedZoneId
+      Variables:
+        InfoFunction:
+          Ref: InfoFunction
+        EvaluateFunction:
+          Ref: EvaluateFunction
+        DomainName:
+          Ref: DomainName
+    DependsOn: BasicAuthFunction
+  BasicAuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://hcalder-public-fileshare/d2701429384435b47065d0fa543c9750
+      Handler: lambda_function.lambda_handler
+      Runtime: python2.7
+      Tracing: Active
+      Environment:
+        Variables:
+          CLIENT_ID:
+            Ref: UserPoolTokenClient
+          USER_POOL_ID:
+            Ref: UserPool
+          LOG_LEVEL: INFO
+Outputs:
+  UserPoolDomain:
+    Description: URL to sign up & sign in users.
+    Value:
+      Fn::Join:
+      - ''
+      - - https://
+        - Ref: UserPoolDomain
+        - .auth.
+        - Ref: AWS::Region
+        - .amazoncognito.com/login?response_type=code&client_id=
+        - Ref: UserPoolTokenClient
+        - '&redirect_uri='
+        - https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md
+  SageMakerTableauApi:
+    Description: URL for your SageMaker Tableau connector.
+    Value:
+      Ref: DomainName
