@@ -16,7 +16,15 @@ Metadata:
       Parameters:
       - QSS3BucketName
       - QSS3BucketRegion
-      - QSS3KeyPrefix      
+      - QSS3KeyPrefix
+    ParameterLabels:
+      DomainName:
+        default: "Domain name to deploy the connector to."
+      CertificateARN:
+        default: "Certificate attached to domain."
+      HostedZoneId:
+        default: "Id of your domain's hosted zone."
+
 Globals:
   Function:
     Runtime: python3.7
