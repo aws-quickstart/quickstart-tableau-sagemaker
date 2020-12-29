@@ -15,10 +15,7 @@ The AWS CloudFormation templates included with the Quick Start automate the foll
 
 You can also use the AWS CloudFormation templates as a starting point for your own implementation.
 
-[#tableau1]
-.Quick Start Architecture for the _SageMaker AutoPilot Tableau Connector_ on AWS
-[link=docs/images/architecture_diagram.png]
-image::..docs/images/architecture_diagram.png[ArchitectureDiagram]
+![Quick Start SageMaker AutoPilot Tableau Connector Architecture](../docs/images/architecture_diagram.png)
 
 For architectural details, best practices, step-by-step instructions, and customization options, see the deployment guide - ADD HERE.
 
