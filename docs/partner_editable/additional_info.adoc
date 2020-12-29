@@ -9,23 +9,24 @@ The connector can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_
 [#tableau2]
 .Calculation Syntax for _{partner-product-name}_ on AWS
 [link=images/tableau_calculations.png]
-image::../images/tableau_calculations.png[TableauCalc,width=648,height=439]
+image::../images/tableau_calculations.png[TableauCalc]
 
 Notes about drafting calculations for the {partner-product-name}:
-* Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
-* SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.
-* Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+
+- Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
+- SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.
+- Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
 
 == Other useful information
 
 === AWS services
-* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
-* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
-* https://docs.aws.amazon.com/lambda/[AWS Lambda]
-* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+ - http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+ - https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+ - https://docs.aws.amazon.com/lambda/[AWS Lambda]
+ - https://docs.aws.amazon.com/cognito/[Amazon Cognito]
 
 === Quick Start reference deployments
-* https://aws.amazon.com/quickstart/[AWS Quick Start home page]
+ - https://aws.amazon.com/quickstart/[AWS Quick Start home page]
 
 === GitHub Repository
 You can visit our GitHub repository to download the templates and scripts for this Quick
