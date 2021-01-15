@@ -1,0 +1,57 @@
+// Add steps as necessary for accessing the software, post-configuration, and testing. Don’t include full usage instructions for your software, but add links to your product documentation for that information.
+
+This option deploys the {partner-product-name} in a serverless application running on Amazon API Gateway, AWS Lambda, and Amazon Cognito in the AWS Region you choose when you deploy the Quick Start. Figure 1 shows the standalone architecture. 
+
+=== Step 1. Prepare an AWS Account
+
+If you don’t already have an AWS account, create on at http://aws.amazon.com by following the on-screen instructions. 
+
+Use the region selector in the navigation bar to choose the AWS Region where you want to deploy the {partner-product-name} on AWS. The {partner-product-name} should be deployed to the same region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple regions, the recommended architecture is to deploy an instance of the connector for each region. 
+
+Create an SSL Certificate in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *provision certificates* or *request a certificate*. In the configuration pane type the domain name you plan to utilize for the connector (Optional) provision this as a wildcard cert for subdomains. 
+
+=== Step 2. Launch the Quick Start
+
+This AWS CloudFormation stack takes approximately 15 minutes to create. This template is launched in the US-West (Oregon) region by default. You can change the region to match what you selected in step 1 by using the region selector in the navigation bar. You can also download the templates to use as a starting point for your own implementation. 
+
+When you finish customizing the parameters, choose Next. 
+
+On the Options page, specify tags (key-value pairs) for resources in your stack and set advanced options. When you’re done, choose Next. 
+
+On the Review page, review and confirm the template settings. Under Capabilities, acknowledge that the template will create IAM resources. 
+
+Choose Create to deploy the stack
+
+Monitor the status of the stack. When the status is CREATE_COMPLETE, the deployment is complete. 
+
+Use the information displayed in the Outputs tab for the stack to view the resources that were created. The AWS CloudFormation template for {partner-product-name} creates the following outputs:
+
+ - _UserPoolDomain_ – A URL for Cognito to sign up & sign in users of the connector
+ - _SageMakerTableauApi_ – A URL for users to connect to the connector from Tableau
+
+=== Step 3. Test the Deployment
+
+Navigate to the URL for the UserPoolDomain output, and sign up a user
+
+Sign in to the connector at the Cognito UserPoolDomain with the credentials of your newly provisioned user
+
+=== Step 4. (Optional) Testing from Tableau
+
+Open Tableau Desktop (Version 2020.1 or newer)
+
+*Help*
+
+*Settings & Performance*
+
+*Manage Analytics Extension Connection*
+
+ - *Server*: _TabPy /External API_
+ - *Server*: 
+ - *Port*: _443_
+ - *Sign in wiht a username and password*: _yes_
+ - *Require SSL*: _yes_
+
+[#tableau1]
+.Connectivity from Tableau for the _{partner-product-name}_ on AWS
+[link=images/tableau_connection.png]
+image::../images/tableau_connection.png[TableauConnection]

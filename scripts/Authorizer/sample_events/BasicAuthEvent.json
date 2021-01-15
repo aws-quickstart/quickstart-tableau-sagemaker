@@ -1,0 +1,129 @@
+{
+    "methodArn": "arn:aws:execute-api:us-west-2:296531645984:961dp15vb1/prod/POST/evaluate",
+    "resource": "/evaluate",
+    "requestContext": {
+        "requestTime": "04/Dec/2020:16:13:32 +0000",
+        "protocol": "HTTP/1.1",
+        "domainName": "cooltableau.sagemakertableauinterworksconnector.com",
+        "resourceId": "2ledj0",
+        "apiId": "961dp15vb1",
+        "resourcePath": "/evaluate",
+        "httpMethod": "POST",
+        "domainPrefix": "cooltableau",
+        "requestId": "f3a98dcc-5a62-45b9-bb5e-8aca07b17a56",
+        "extendedRequestId": "XCP28FZVvHcF6rA=",
+        "path": "/evaluate",
+        "stage": "prod",
+        "requestTimeEpoch": 1607098412337,
+        "identity": {
+            "userArn": null,
+            "cognitoAuthenticationType": null,
+            "principalOrgId": null,
+            "accessKey": null,
+            "caller": null,
+            "userAgent": "PostmanRuntime/7.26.8",
+            "user": null,
+            "cognitoIdentityPoolId": null,
+            "cognitoIdentityId": null,
+            "cognitoAuthenticationProvider": null,
+            "sourceIp": "47.217.102.121",
+            "accountId": null
+        },
+        "accountId": "296531645984"
+    },
+    "queryStringParameters": {},
+    "httpMethod": "POST",
+    "multiValueQueryStringParameters": {},
+    "pathParameters": {},
+    "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "5301",
+        "Via": "1.1 ed76ff4369fc06327aa8a7520f693ae2.cloudfront.net (CloudFront)",
+        "Accept-Encoding": "gzip, deflate, br",
+        "CloudFront-Is-SmartTV-Viewer": "false",
+        "CloudFront-Forwarded-Proto": "https",
+        "X-Forwarded-For": "47.217.102.121, 130.176.109.156",
+        "CloudFront-Viewer-Country": "US",
+        "Accept": "*/*",
+        "User-Agent": "PostmanRuntime/7.26.8",
+        "X-Amzn-Trace-Id": "Root=1-5fca602c-649a0b236485cd1b3c88bbb9",
+        "Host": "cooltableau.sagemakertableauinterworksconnector.com",
+        "X-Forwarded-Proto": "https",
+        "Referer": "http://cooltableau.sagemakertableauinterworksconnector.com/evaluate",
+        "CloudFront-Is-Tablet-Viewer": "false",
+        "X-Forwarded-Port": "443",
+        "X-Amz-Cf-Id": "itJKxNZMYDaBl2-PrxdyqQWhbYuaYhb3oQ9Xu6N0ycyM4-fVdgaAeA==",
+        "CloudFront-Is-Mobile-Viewer": "false",
+        "Authorization": "Basic aG9sdEBpbnRlcndvcmtzLmNvbTpzZWNyZXQ=",
+        "CloudFront-Is-Desktop-Viewer": "true"
+    },
+    "multiValueHeaders": {
+        "Content-Type": [
+            "application/json"
+        ],
+        "Content-Length": [
+            "5301"
+        ],
+        "Via": [
+            "1.1 ed76ff4369fc06327aa8a7520f693ae2.cloudfront.net (CloudFront)"
+        ],
+        "Accept-Encoding": [
+            "gzip, deflate, br"
+        ],
+        "CloudFront-Is-SmartTV-Viewer": [
+            "false"
+        ],
+        "CloudFront-Forwarded-Proto": [
+            "https"
+        ],
+        "X-Forwarded-For": [
+            "47.217.102.121, 130.176.109.156"
+        ],
+        "CloudFront-Viewer-Country": [
+            "US"
+        ],
+        "Accept": [
+            "*/*"
+        ],
+        "User-Agent": [
+            "PostmanRuntime/7.26.8"
+        ],
+        "X-Amzn-Trace-Id": [
+            "Root=1-5fca602c-649a0b236485cd1b3c88bbb9"
+        ],
+        "Host": [
+            "cooltableau.sagemakertableauinterworksconnector.com"
+        ],
+        "X-Forwarded-Proto": [
+            "https"
+        ],
+        "Referer": [
+            "http://cooltableau.sagemakertableauinterworksconnector.com/evaluate"
+        ],
+        "CloudFront-Is-Tablet-Viewer": [
+            "false"
+        ],
+        "X-Forwarded-Port": [
+            "443"
+        ],
+        "X-Amz-Cf-Id": [
+            "itJKxNZMYDaBl2-PrxdyqQWhbYuaYhb3oQ9Xu6N0ycyM4-fVdgaAeA=="
+        ],
+        "CloudFront-Is-Mobile-Viewer": [
+            "false"
+        ],
+        "Authorization": [
+            "Basic aG9sdEBpbnRlcndvcmtzLmNvbTpzZWNyZXQ="
+        ],
+        "CloudFront-Is-Desktop-Viewer": [
+            "true"
+        ]
+    },
+    "stageVariables": {
+        "InfoFunction": "cooltableauthing-InfoFunction-PFOIHSZTG384",
+        "EvaluateFunction": "cooltableauthing-EvaluateFunction-40WWCWLLPDAC",
+        "DomainName": "cooltableau.sagemakertableauinterworksconnector.com"
+    },
+    "path": "/evaluate",
+    "type": "REQUEST"
+}

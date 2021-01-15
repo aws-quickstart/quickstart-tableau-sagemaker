@@ -3,7 +3,9 @@
 # quickstart-tableau-awssagemaker
 ## Tableau connector with Amazon API Gateway, Amazon Lambda, and Amazon Cognito for Amazon SageMaker 
 
-This Quick Start helps you deploy a connector environment that is based on Tableau's Analytics Extensions and includes the serverless application development framework of Amazon Serverless Applicaiton Model.
+
+This Quick Start helps you deploy a connector environment that is based on Tableau's Analytics Extensions and includes the serverless application development framework of Amazon Serverless Application Model.
+
 
 This AWS-validated architecture includes an Amazon Cognito user pool, which is an enterprise-class identity provider and authentication service. Amazon Cognito allows efficient user sign up & sign in for the connectors resources.
 
@@ -15,7 +17,9 @@ The AWS CloudFormation templates included with the Quick Start automate the foll
 
 You can also use the AWS CloudFormation templates as a starting point for your own implementation.
 
-ADD ARCHITECTURE DIAGRAM 
+
+![Quick Start SageMaker AutoPilot Tableau Connector Architecture](/docs/images/architecture_diagram.png)
+
 
 For architectural details, best practices, step-by-step instructions, and customization options, see the deployment guide - ADD HERE.
 

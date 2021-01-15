@@ -1,0 +1,14 @@
+// Replace the <n> in each row to specify the number of resources used in this deployment. Remove the rows for resources that aren’t used.
+|===
+|Resource |This deployment uses
+|IAM roles | 3
+|Lambda functions | 3
+|Lambda permission | 3
+|REST APIs | 1
+|API Gateway Stage | 2
+|Cognito User Pool Domain | 1
+|Cognito User Pool | 1
+|Cognito User Pool Token Client | 1
+|Route53 RecordSet | 1
+|API Gateway Domain Name | 1
+|===

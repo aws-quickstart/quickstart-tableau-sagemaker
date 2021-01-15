@@ -1,0 +1,33 @@
+
+== Best practices for using {partner-product-name} on AWS
+// Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
+
+While using the {partner-product-name} it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The connector allows end users to utilize their SageMaker Machine Learning models inside of Tableau’s Table Calculations. For effective use of the connector, end users are to pass data from Tableau Table Calculations at the granularity the SageMaker model is expecting to receive (no aggregation, translation, etc).
+
+The connector can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. For the {partner-product-name}, the syntax of these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)
+
+[#tableau2]
+.Calculation Syntax for _{partner-product-name}_ on AWS
+[link=images/tableau_calculations.png]
+image::../images/tableau_calculations.png[TableauCalc]
+
+Notes about drafting calculations for the {partner-product-name}:
+
+- Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
+- SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.
+- Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+
+== Other useful information
+
+=== AWS services
+ - http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+ - https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+ - https://docs.aws.amazon.com/lambda/[AWS Lambda]
+ - https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+
+=== Quick Start reference deployments
+ - https://aws.amazon.com/quickstart/[AWS Quick Start home page]
+
+=== GitHub Repository
+You can visit our GitHub repository to download the templates and scripts for this Quick
+Start, to post your comments, and to share your customizations with others. 

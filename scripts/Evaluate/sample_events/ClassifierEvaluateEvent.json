@@ -1,0 +1,205 @@
+{
+  "script": "classifier-sm-endpoint",
+  "data": {
+    "_arg1": [
+      37,
+      40,
+      56,
+      45,
+      46,
+      55,
+      52,
+      45
+    ],
+    "_arg2": [
+      "services",
+      "admin.",
+      "services",
+      "services",
+      "blue-collar",
+      "retired",
+      "technician",
+      "blue-collar"
+    ],
+    "_arg3": [
+      "married",
+      "married",
+      "married",
+      "married",
+      "married",
+      "single",
+      "married",
+      "married"
+    ],
+    "_arg4": [
+      "high.school",
+      "basic.6y",
+      "high.school",
+      "basic.9y",
+      "basic.6y",
+      "high.school",
+      "basic.9y",
+      "basic.9y"
+    ],
+    "_arg5": [
+      "no",
+      "no",
+      "no",
+      "unknown",
+      "unknown",
+      "no",
+      "no",
+      "no"
+    ],
+    "_arg6": [
+      "yes",
+      "no",
+      "no",
+      "no",
+      "yes",
+      "yes",
+      "yes",
+      "yes"
+    ],
+    "_arg7": [
+      "no",
+      "no",
+      "yes",
+      "no",
+      "yes",
+      "no",
+      "no",
+      "no"
+    ],
+    "_arg8": [
+      "telephone",
+      "telephone",
+      "telephone",
+      "telephone",
+      "telephone",
+      "telephone",
+      "telephone",
+      "telephone"
+    ],
+    "_arg9": [
+      "may",
+      "may",
+      "may",
+      "may",
+      "may",
+      "may",
+      "may",
+      "may"
+    ],
+    "_arg10": [
+      "mon",
+      "mon",
+      "mon",
+      "mon",
+      "mon",
+      "mon",
+      "mon",
+      "mon"
+    ],
+    "_arg11": [
+      226,
+      151,
+      307,
+      198,
+      440,
+      342,
+      1666,
+      225
+    ],
+    "_arg12": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+    ],
+    "_arg13": [
+      999,
+      999,
+      999,
+      999,
+      999,
+      999,
+      999,
+      999
+    ],
+    "_arg14": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "_arg15": [
+      "nonexistent",
+      "nonexistent",
+      "nonexistent",
+      "nonexistent",
+      "nonexistent",
+      "nonexistent",
+      "nonexistent",
+      "nonexistent"
+    ],
+    "_arg16": [
+      1.1,
+      1.1,
+      1.1,
+      1.1,
+      1.1,
+      1.1,
+      1.1,
+      1.1
+    ],
+    "_arg17": [
+      93.994,
+      93.994,
+      93.994,
+      93.994,
+      93.994,
+      93.994,
+      93.994,
+      93.994
+    ],
+    "_arg18": [
+      -36.4,
+      -36.4,
+      -36.4,
+      -36.4,
+      -36.4,
+      -36.4,
+      -36.4,
+      -36.4
+    ],
+    "_arg19": [
+      4.857,
+      4.857,
+      4.857,
+      4.857,
+      4.857,
+      4.857,
+      4.857,
+      4.857
+    ],
+    "_arg20": [
+      5191,
+      5191,
+      5191,
+      5191,
+      5191,
+      5191,
+      5191,
+      5191
+    ]
+  }
+}
