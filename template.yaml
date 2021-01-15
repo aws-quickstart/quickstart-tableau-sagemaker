@@ -1,0 +1,247 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Functions and API for connecting Tableau to SageMaker. 
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    - Label:
+        default: Domain configuration
+      Parameters:
+      - DomainName
+      - HostedZoneId
+      - CertificateARN
+    - Label:
+        default: AWS Quick Start configuration
+      Parameters:
+      - QSS3BucketName
+      - QSS3BucketRegion
+      - QSS3KeyPrefix
+    ParameterLabels:
+      DomainName:
+        default: "Domain name to deploy the connector to."
+      CertificateARN:
+        default: "Certificate attached to domain."
+      HostedZoneId:
+        default: "Id of your domain's hosted zone."
+
+Globals:
+  Function:
+    Runtime: python3.7
+    Timeout: 180
+Parameters:
+  DomainName:
+    Type: String
+    Description: Domain name for SageMaker API. (tableauapi.domain.com)
+  CertificateARN:
+    Type: String
+    Description: ARN of certificate attached to domain.
+  HostedZoneId:
+    Type: 'AWS::Route53::HostedZone::Id'
+    Description: Route 53 Hosted Zone for your domain.
+  QSS3BucketName:
+    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
+    ConstraintDescription: Quick Start bucket name can include numbers, lowercase
+      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
+      (-).
+    Default: aws-quickstart-interworks-tableau-sagemaker-autopilot
+    Description: S3 bucket name for the Quick Start assets. This string can include
+      numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
+      or end with a hyphen (-).
+    Type: String
+  QSS3BucketRegion:
+    Default: 'us-west-2'
+    Description: 'The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.'
+    Type: String
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), and forward slash (/).
+    Default: quickstart-resources/
+    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), and
+      forward slash (/).
+    Type: String
+
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+      UserPoolName: SageMakerTableauAPIUsers
+      UsernameAttributes:
+      - email
+      AutoVerifiedAttributes:
+      - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+  UserPoolTokenClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows: 
+        - code
+      AllowedOAuthScopes: 
+        - aws.cognito.signin.user.admin
+        - email
+        - openid
+        - phone
+        - profile
+      CallbackURLs: 
+        - "https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md"
+      UserPoolId: !Ref UserPool
+      GenerateSecret: false
+      SupportedIdentityProviders: 
+        - COGNITO
+      ExplicitAuthFlows:
+      - USER_PASSWORD_AUTH
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Select [2, !Split [/, !Ref AWS::StackId ]]
+      UserPoolId: !Ref UserPool
+  InfoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri:
+        Bucket: !Ref QSS3BucketName
+        Key: !Sub "${QSS3KeyPrefix}/scripts/Info/Info.zip"
+      Handler: lambda_function.lambda_handler
+      Events:
+        InfoGetRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SageMakerApi
+            Path: /info
+            Method: get
+  EvaluateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri:
+        Bucket: !Ref QSS3BucketName
+        Key: !Sub "${QSS3KeyPrefix}/scripts/Evaluate/Evaluate.zip"
+      Handler: lambda_function.lambda_handler
+      Policies:
+      - AmazonSageMakerFullAccess
+      Events:
+        EvaluatePostRequest:
+          Type: Api
+          Properties:
+            Auth:
+              Authorizer: LambdaRequestAuthorizer
+            RestApiId: !Ref SageMakerApi
+            Path: /evaluate
+            Method: post
+  SageMakerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Auth:
+        Authorizers:
+          LambdaRequestAuthorizer:
+            FunctionPayloadType: REQUEST
+            FunctionArn:
+              Fn::GetAtt:
+                - BasicAuthFunction
+                - Arn
+            Identity:
+              Headers:
+                - Authorization
+      StageName: prod
+      DefinitionBody:
+        openapi: "3.0.1"
+        info:
+          title: "APISageMakerTableauConnector"
+          description: "REST API for SageMaker Tableau Connector."
+          version: "2020-11-17T16:10:11Z"
+        paths:
+          /info:
+            get:
+              responses:
+                '200':
+                  description: "200 response"
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/Empty"
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InfoFunction.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: "200"
+                passthroughBehavior: "when_no_match"
+                httpMethod: "POST"
+                contentHandling: "CONVERT_TO_TEXT"
+                type: "aws"
+          /evaluate:
+            post:
+              responses:
+                '200':
+                  description: "200 response"
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/Empty"
+              security:
+              - LambdaRequestAuthorizer: []
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EvaluateFunction.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: "200"
+                passthroughBehavior: "when_no_match"
+                httpMethod: "POST"
+                contentHandling: "CONVERT_TO_TEXT"
+                type: "aws"
+        components:
+          schemas:
+            Empty:
+              title: "Empty Schema"
+              type: "object"
+          securitySchemes:
+            LambdaRequestAuthorizer:
+              type: "apiKey"
+              name: "Authorization"
+              in: "header"
+              x-amazon-apigateway-authtype: "custom"
+              x-amazon-apigateway-authorizer:
+                type: "request"
+                authorizerUri: 
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BasicAuthFunction.Arn}/invocations"
+                authorizerResultTtlInSeconds: 0
+                identitySource: "method.request.header.Authorization"
+      Domain:
+       CertificateArn: !Ref CertificateARN
+       DomainName: !Ref DomainName
+       EndpointConfiguration: EDGE
+       Route53:
+        HostedZoneId: !Ref HostedZoneId
+      Variables:
+        InfoFunction: !Ref InfoFunction
+        EvaluateFunction: !Ref EvaluateFunction
+        DomainName: !Ref DomainName
+  BasicAuthFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri:
+          Bucket: !Ref QSS3BucketName
+          Key: !Sub "${QSS3KeyPrefix}/scripts/Authorizer/Authorizer.zip"
+
+        Handler: lambda_function.lambda_handler
+        Runtime: python2.7
+        Tracing: Active
+        Environment:
+            Variables:
+                CLIENT_ID: !Ref UserPoolTokenClient
+                USER_POOL_ID: !Ref UserPool
+                LOG_LEVEL: INFO
+Outputs:
+  UserPoolDomain:
+    Description: "URL to sign up & sign in users."
+    Value: !Join ['',[https://, !Ref UserPoolDomain, .auth., !Ref AWS::Region, ".amazoncognito.com/login?response_type=code&client_id=", !Ref UserPoolTokenClient, "&redirect_uri=" , https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md ]]
+  SageMakerTableauApi:
+    Description: "URL for your SageMaker Tableau connector."
+    Value: !Ref DomainName
