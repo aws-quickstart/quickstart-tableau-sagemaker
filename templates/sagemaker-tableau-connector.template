@@ -18,6 +18,12 @@ Metadata:
       - QSS3BucketRegion
       - QSS3KeyPrefix
     ParameterLabels:
+      QSS3KeyPrefix:
+        default: Quick Start S3 Key Prefix
+      QSS3BucketName:
+        default: Quick Start S3 Bucket Name
+      QSS3BucketRegion:
+        default: Quick Start S3 Bucket Region
       DomainName:
         default: "Domain name to deploy the connector to."
       CertificateARN:
