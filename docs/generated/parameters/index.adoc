@@ -1,1 +1,3 @@
-// placeholder
+
+=== Deploy a new connector
+include::sagemaker-tableau-connector.adoc[]

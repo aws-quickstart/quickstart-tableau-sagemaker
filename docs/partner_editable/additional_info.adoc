@@ -1,23 +1,49 @@
-// Add steps as necessary for accessing the software, post-configuration, and testing. Don’t include full usage instructions for your software, but add links to your product documentation for that information.
-//Should any sections not be applicable, remove them
-
 == Test the deployment
-// If steps are required to test the deployment, add them here. If not, remove the heading
+Navigate to the URL for the UserPoolDomain output, and sign up a user
 
-== Post-deployment steps
-// If post-deployment steps are required, add them here. If not, remove the heading
+Sign in to the connector at the Cognito UserPoolDomain with the credentials of your newly provisioned user
+
+=== (Optional) Testing from Tableau
+
+Open Tableau Desktop (Version 2020.1 or newer)
+
+*Help*
+
+*Settings & Performance*
+
+*Manage Analytics Extension Connection*
+
+ - *Server*: _TabPy /External API_
+ - *Server*: 
+ - *Port*: _443_
+ - *Sign in wiht a username and password*: _yes_
+ - *Require SSL*: _yes_
+
+[#tableau1]
+.Connectivity from Tableau for the _{partner-product-name}_ on AWS
+[link=images/tableau_connection.png]
+image::../images/tableau_connection.png[TableauConnection]
 
 == Best practices for using {partner-product-short-name} on AWS
-// Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-_Add any best practices for using the software._
+While using the {partner-product-name} it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The connector allows end users to utilize their SageMaker Machine Learning models inside of Tableau’s Table Calculations. For effective use of the connector, end users are to pass data from Tableau Table Calculations at the granularity the SageMaker model is expecting to receive (no aggregation, translation, etc).
 
-== Security
-// Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
+The connector can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. For the {partner-product-name}, the syntax of these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)
 
-_Add any security-related information._
+[#tableau2]
+.Calculation Syntax for _{partner-product-name}_ on AWS
+[link=images/tableau_calculations.png]
+image::../images/tableau_calculations.png[TableauCalc]
+
+Notes about drafting calculations for the {partner-product-name}:
+
+* Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
+* SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.
+* Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
 
 == Other useful information
-//Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.
-
-_Add any other details that will help the customer use the software on AWS._
+=== AWS services
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]

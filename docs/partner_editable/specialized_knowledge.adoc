@@ -1,6 +1,10 @@
-// Replace the content in <>
-// For example: “familiarity with basic concepts in networking, database operations, and data encryption” or “familiarity with <software>.”
-// Include links if helpful. 
-// You don't need to list AWS services or point to general info about AWS; the boilerplate already covers this.
+This Quick Start assumes familiarity with the following AWS services:
 
-This Quick Start also assumes familiarity with <knowledge expectations specific to this Quick Start>.
+* http://aws.amazon.com/documentation/acm/[AWS Certificate Manager]
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+* https://docs.aws.amazon.com/sagemaker/[Amazon SageMaker]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+* https://docs.aws.amazon.com/route53/[Amazon Route 53]
