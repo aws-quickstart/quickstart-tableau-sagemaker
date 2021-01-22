@@ -2,23 +2,23 @@ project:
   name: quickstart-interworks-tableau-sagemaker-autopilot
   regions:
   - us-east-1
-  - us-east-2
-  - us-west-1
-  - us-west-2
-  - eu-north-1
-  - eu-central-1
-  - eu-west-1
-  - eu-west-2
-  - eu-west-3
+  # - us-east-2
+  # - us-west-1
+  # - us-west-2
+  # - eu-north-1
+  # - eu-central-1
+  # - eu-west-1
+  # - eu-west-2
+  # - eu-west-3
 
 tests:
   default:
-    template: ./template.yaml
+    template: templates/sagemaker-tableau-connector.template
     s3_regional_buckets: true
     parameters:
-      DomainName: "$[taskcat_random-string].sagemakertableauinterworksconnector.com"
-      CertificateARN: arn:aws:acm:us-east-1:296531645984:certificate/3bace4c3-fdf3-4477-99dd-b1f5960acd02
-      HostedZoneId: Z06778352L9E9SA017LSO
+      DomainName: override
+      CertificateARN: override
+      HostedZoneId: override
       AuthDomain: quickstart-testing-the-sagemaker-aws-tableau-connector
       QSS3KeyPrefix: "quickstart-interworks-tableau-sagemaker-autopilot"
       QSS3BucketName: "$[taskcat_autobucket]"
