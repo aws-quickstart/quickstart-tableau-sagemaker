@@ -2,4 +2,6 @@
 // Identify your target audience and explain how/why they would use this Quick Start.
 //Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
 
-This Quick Start is for users who are provisioning resources to connect their Amazon SageMaker AutoPilot models to Tableau workbooks on Tableau Desktop and Server. 
+This Quick Start creates a solution that enables Tableau users to blend predictions from Amazon SageMaker hosted models into Tableau powered visualizations.This solution works with any Tableau product supported by the Tableau Analytics Extensions which includes Tableau Desktop and Tableau Server. 
+
+The solution is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, any machine learning (ML) models that are hosted by Amazon SageMaker Hosting Services can be integrated with Tableau through this solution. For non-Autopilot trained models, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom model input and output formats.
