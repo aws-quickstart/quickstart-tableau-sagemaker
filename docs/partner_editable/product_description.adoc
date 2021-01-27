@@ -7,6 +7,6 @@ Quick Starts are automated deployments that use AWS CloudFormation templates to 
 
  - A REST API that can be connected to from Tableau.
  - A suite of AWS Lambda functions that facilitate connectivity between Amazon SageMaker Hosted endpoints and Tableau. 
- - An Amazon Cognito user pool and client that allows for sign up and sign in for users of the connector. 
+ - An Amazon Cognito user pool and client that allows for sign up and sign in for users of the solution. 
 
 This Quick Start is for users who would like to connect Amazon SageMaker machine learning with their enterprise reporting solution in Tableau through an AWS-validated architecture. Please know that we may share who uses AWS Quick Starts with the AWS partner that collaborated with AWS on the content of the Quick Start.
