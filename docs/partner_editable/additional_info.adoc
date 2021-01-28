@@ -1,3 +1,9 @@
+= Additional Information
+
+== Deploy without a VPC
+
+The deployment steps describe how to deploy the solution into an AWS VPC, new or existing. To deploy the solution without a VPC set the parameter "LaunchToVpc" to "No" when launching the Quick Start. 
+
 
 == Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
@@ -17,7 +23,7 @@ Notes about drafting calculations:
 - SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the solution.
 - Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
 
-== Customizing Data Transformations
+== Customization
 
 It is recommended for users of the {partner-product-name} solution to use Amazon SageMaker Autopilot to train models, in the event that you are not using an Autopilot trained model it is possible the solution will require customizations. The solution utilizes a Lambda function to translate the Tableau Analytics Extension API call to a format that is compatible with SageMaker endpoints trained with AutoPilot. In the event that you need to apply customizations to the solution, follow these steps.
 
