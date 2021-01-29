@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-:quickstart-project-name: quickstart-documentation-base
-:partner-product-name: Amazon SageMaker for Tableau
-:partner-company-name: InterWorks, Inc.
-:doc-month: December
-:doc-year: 2020
-:partner-contributors: Holt Calder, InterWorks, Madeleine Corneli, Tableau Software, Dylan Tong, Shivansh Singh, Tony Bulding, Amazon Web Services
-:quickstart-contributors: Jim Smith - AWS Global Partner SA, AWS & Joe Jones - Technical Product Manager, AWS
-:deployment_time: 15 minutes / 30 minutes
-:default_deployment_region: us-west-2
-=======
 // Change the following attributes.
 :quickstart-project-name: quickstart-interworks-tableau-sagemaker-autopilot
 :partner-product-name: SageMaker AutoPilot Tableau Connector
@@ -36,4 +25,3 @@
 // Additional content will be generated automatically based on these attributes.
 // :marketplace_subscription:
 // :marketplace_listing_url: https://example.com/
->>>>>>> 178ebbc7cd44f119812dbc3e40f709f633ae3dbb

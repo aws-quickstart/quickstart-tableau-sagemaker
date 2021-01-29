@@ -1,7 +1,9 @@
 // If no preperation is required, remove all content from here
 
-==== Prepare your AWS account
+=== Prerequisites
 
-Use the region selector in the navigation bar to choose the AWS Region where you want to deploy the {partner-product-name} on AWS. The {partner-product-name} should be deployed to the same region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple regions, the recommended architecture is to deploy an instance of the connector for each region. 
+Before deploying the {partner-product-name} on AWS, you must have the following:
 
-Create an SSL Certificate in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *provision certificates* or *request a certificate*. In the configuration pane type the domain name you plan to utilize for the connector (Optional) provision this as a wildcard cert for subdomains. 
+ - An AWS Account.
+ - A domain managed by Amazon Route 53.
+ - An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS region.

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // There are generally two deployment options. If additional are required, add them here
 # Deployment Options
 
@@ -7,11 +6,3 @@ This Quick Start provides three deployment option:
  - *Deploy a new solution (end-to-end deployment) into a New VPC^*. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other networking components. 
  - *Deploy a new solution into an existing VPC*. This option deploys the solutions resources into an existing VPC.
  - *Deploy a new solution into no VPC*. This option deploys the solutions resources into the AWS Cloud, but not in a VPC.
-=======
-// Edit this placeholder text to accurately describe your architecture.
-
-This Quick Start provides two deployment options:
-
-* *Deploy a new {partner-product-name}*. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other infrastructure components.
-
->>>>>>> 178ebbc7cd44f119812dbc3e40f709f633ae3dbb
