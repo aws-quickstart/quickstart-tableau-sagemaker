@@ -1,10 +1,12 @@
 // Replace the content in <>
 // Briefly describe the software. Use consistent and clear branding. 
 // Include the benefits of using the software on AWS, and provide details on usage scenarios.
-This Quick Start deployment guide provides step-by-step instructions for deploying a SageMaker Tableau Analytic Extension, based on Tableau’s Analytics Extension framework for including the analytics and visualization capabilities of Tableau Server on the Amazon Web Services (AWS) Cloud Machine Learning platform, SageMaker AutoPilot. Quick Starts are automated deployments that use AWS CloudFormation templates to launch, configure, and run the AWS compute, network, storage, and other services required to deploy a specific workload on AWS. This Quick Start deploys a serverless application that can be used with Amazon SageMaker and Tableau Server or Tableau Desktop for BI and data visualization capabilities. The Quick Start deployment includes the following:
+This Quick Start deployment guide provides step-by-step instructions for deploying this solution.
+
+Quick Starts are automated deployments that use AWS CloudFormation templates to launch, configure, and run the AWS compute, network, storage, and other services required to deploy a specific workload on AWS. The Quick Start deployment includes the following:
 
  - A REST API that can be connected to from Tableau.
- - A suite of AWS Lambda functions that facilitate connectivity between Amazon SageMaker AutoPilot and Tableau. 
- - An Amazon Cognito user pool and client that allows for sign up and sign in for users of the connector. 
+ - A suite of AWS Lambda functions that facilitate connectivity between Amazon SageMaker Hosted endpoints and Tableau. 
+ - An Amazon Cognito user pool and client that allows for sign up and sign in for users of the solution. 
 
 This Quick Start is for users who would like to connect Amazon SageMaker machine learning with their enterprise reporting solution in Tableau through an AWS-validated architecture. Please know that we may share who uses AWS Quick Starts with the AWS partner that collaborated with AWS on the content of the Quick Start.
