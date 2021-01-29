@@ -1,12 +1,39 @@
+<<<<<<< HEAD
 = Additional Information
 
 == Deploy without a VPC
 
 The deployment steps describe how to deploy the solution into an AWS VPC, new or existing. To deploy the solution without a VPC set the parameter "LaunchToVpc" to "No" when launching the Quick Start. 
 
+=======
+== Test the deployment
+Navigate to the URL for the UserPoolDomain output, and sign up a user
+>>>>>>> 178ebbc7cd44f119812dbc3e40f709f633ae3dbb
 
-== Best practices for using {partner-product-name} on AWS
-// Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
+Sign in to the connector at the Cognito UserPoolDomain with the credentials of your newly provisioned user
+
+=== (Optional) Testing from Tableau
+
+Open Tableau Desktop (Version 2020.1 or newer)
+
+*Help*
+
+*Settings & Performance*
+
+*Manage Analytics Extension Connection*
+
+ - *Server*: _TabPy /External API_
+ - *Server*: 
+ - *Port*: _443_
+ - *Sign in wiht a username and password*: _yes_
+ - *Require SSL*: _yes_
+
+[#tableau1]
+.Connectivity from Tableau for the _{partner-product-name}_ on AWS
+[link=images/tableau_connection.png]
+image::../images/tableau_connection.png[TableauConnection]
+
+== Best practices for using {partner-product-short-name} on AWS
 
 While using the {partner-product-name} solution, it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The solution allows Tableau end users to use any ML model that is hosted on Amazon SageMaker through Tableau’s Table Calculations. End users are responsible to pass data from Tableau Table Calculations at the granularity expected by the SageMaker hotsted model (no aggregation, translation, etc).
 
@@ -19,9 +46,15 @@ image::../images/tableau_calculations.png[TableauCalc]
 
 Notes about drafting calculations:
 
+<<<<<<< HEAD
 - Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
 - SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the solution.
 - Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+=======
+* Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
+* SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.
+* Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+>>>>>>> 178ebbc7cd44f119812dbc3e40f709f633ae3dbb
 
 == Customization
 
@@ -55,16 +88,8 @@ The Evaluate Lambda Function is authored in Python 3.7, and contains a function 
 In the event that your ML model requires additional transformations, it is not recommended to modify the Lambda functions code. It is best practice to package input pre-processing logic alongside the ML model as an Amazon SageMaker inference pipeline as described in https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[this blog^]. The input pre-processing logic is responsible for transforming the data format that the Lambda function sends to the SageMaker model endpoint into the format required by the ML model. This allows for additional transformations and presents the opportunity to easily integrate customizations into the functionality of the {partner-product-name} solution. 
 
 == Other useful information
-
 === AWS services
- - http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
- - https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
- - https://docs.aws.amazon.com/lambda/[AWS Lambda]
- - https://docs.aws.amazon.com/cognito/[Amazon Cognito]
-
-=== Quick Start reference deployments
- - https://aws.amazon.com/quickstart/[AWS Quick Start home page]
-
-=== GitHub Repository
-You can visit our GitHub repository to download the templates and scripts for this Quick
-Start, to post your comments, and to share your customizations with others. 
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]

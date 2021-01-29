@@ -1,8 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Functions and API for connecting Tableau to SageMaker (qs-1rhg228ne). 
-
 Metadata:
+  QuickStartDocumentation:
+    EntrypointName: "Deploy a new connector"
+    Order: 1
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label: 
