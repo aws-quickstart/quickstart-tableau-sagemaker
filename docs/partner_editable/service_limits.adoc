@@ -10,4 +10,6 @@
 |Cognito User Pool Token Client | 1
 |Route53 RecordSet | 1
 |API Gateway Domain Name | 1
+|VPC Endpoint | 0 or 1
+|Security Group | 0 or 1
 |===
