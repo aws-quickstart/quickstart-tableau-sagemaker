@@ -141,7 +141,9 @@ Resources:
       - email
       Policies:
         PasswordPolicy:
-          MinimumLength: 6
+          MinimumLength: 8
+          RequireNumbers: true
+          RequireSymbols: true          
   UserPoolTokenClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
@@ -194,7 +196,12 @@ Resources:
         Key: !Sub "${QSS3KeyPrefix}scripts/Evaluate/Evaluate.zip"
       Handler: lambda_function.lambda_handler
       Policies:
-      - AmazonSageMakerFullAccess
+      - Statement:
+        - Sid: SageMakerInvokeEndpointPolicy
+          Effect: Allow
+          Action:
+          - sagemaker:InvokeEndpoint
+          Resource: '*'
       Events:
         EvaluatePostRequest:
           Type: Api
