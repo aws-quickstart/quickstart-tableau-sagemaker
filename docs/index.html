@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
-<title>SageMaker AutoPilot Tableau Connector on the AWS Cloud</title>
+<title>SageMaker AutoPilot Tableau Connector on AWS</title>
 <style>
 
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -789,56 +789,58 @@ p.footer-text a{color:#d7d8d8}
 <div id="toc" class="toc2">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#_overview">Overview</a></li>
 <li><a href="#_sagemaker_autopilot_tableau_connector_on_aws">SageMaker AutoPilot Tableau Connector on AWS</a></li>
-<li><a href="#_cost">Cost</a></li>
-<li><a href="#_software_licenses">Software licenses</a></li>
 <li><a href="#_architecture">Architecture</a></li>
 <li><a href="#_planning_the_deployment">Planning the deployment</a>
 <ul class="sectlevel2">
 <li><a href="#_specialized_knowledge">Specialized knowledge</a></li>
 <li><a href="#_aws_account">AWS account</a></li>
 <li><a href="#_technical_requirements">Technical requirements</a></li>
-<li><a href="#_prerequisites">Prerequisites</a></li>
-</ul>
-</li>
-<li><a href="#_deployment_steps">Deployment steps</a>
-<ul class="sectlevel2">
-<li><a href="#_step_1_prepare_an_aws_account">Step 1. Prepare an AWS Account</a></li>
-<li><a href="#_step_2_launch_the_quick_start">Step 2. Launch the Quick Start</a></li>
+<li><a href="#_sign_in_to_your_aws_account">Sign in to your AWS account</a></li>
+<li><a href="#_launch_the_quick_start">Launch the Quick Start</a></li>
 <li><a href="#_step_3_test_the_deployment">Step 3. Test the Deployment</a></li>
 <li><a href="#_step_4_optional_testing_from_tableau">Step 4. (Optional) Testing from Tableau</a></li>
 </ul>
 </li>
-<li><a href="#_best_practices_for_using_sagemaker_autopilot_tableau_connector_on_aws">Best practices for using SageMaker AutoPilot Tableau Connector on AWS</a></li>
-<li><a href="#_other_useful_information">Other useful information</a>
+<li><a href="#_test_the_deployment">Test the deployment</a>
 <ul class="sectlevel2">
-<li><a href="#_aws_services">AWS services</a></li>
-<li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
-<li><a href="#_github_repository">GitHub Repository</a></li>
+<li><a href="#_optional_testing_from_tableau">(Optional) Testing from Tableau</a></li>
 </ul>
 </li>
-<li><a href="#_send_us_feedback">Send us feedback</a></li>
-<li><a href="#_quick_start_reference_deployments_2">Quick Start reference deployments</a></li>
-<li><a href="#_github_repository_2">GitHub repository</a></li>
-<li><a href="#_notices">Notices</a></li>
+<li><a href="#_best_practices_for_using_sagemaker_autopilot_on_aws">Best practices for using SageMaker AutoPilot on AWS</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+:quickstart-project-name: quickstart-documentation-base
+:partner-product-name: Amazon SageMaker for Tableau
+:partner-company-name: InterWorks, Inc.
+:doc-month: December
+:doc-year: 2020
+:partner-contributors: Holt Calder, InterWorks, Madeleine Corneli, Tableau Software, Dylan Tong, Shivansh Singh, Tony Bulding, Amazon Web Services
+:quickstart-contributors: Jim Smith - AWS Global Partner SA, AWS &amp; Joe Jones - Technical Product Manager, AWS
+:deployment_time: 15 minutes / 30 minutes
+:default_deployment_region: us-west-2</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
 <h2 id="_sagemaker_autopilot_tableau_connector_on_the_aws_cloud" class="discrete text-center">SageMaker AutoPilot Tableau Connector on the AWS Cloud</h2>
 <h2 id="_quick_start_reference_deployment" class="discrete text-left text-center">Quick Start Reference Deployment</h2>
 <div class="imageblock text-center">
 <div class="content">
-<img src="https://aws-quickstart.s3.amazonaws.com/quickstart-documentation-base/docs/boilerplate/.images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
+<img src="https://aws-quickstart.s3.amazonaws.com/quickstart-interworks-tableau-sagemaker-autopilot/docs/boilerplate/.images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
 </div>
 </div>
 <div class="paragraph text-center">
-<p><strong>December 2020</strong><br>
-<em>Holt Calder</em><br>
-<em>Jim Smith - AWS Global Partner SA, AWS &amp; Joe Jones - Technical Product Manager, AWS</em></p>
+<p><strong>January 2021</strong><br>
+<em>Shivansh Singh, Tony Bulding, AWS Quick Start team</em></p>
 </div>
 <div class="admonitionblock tip text-left">
 <table>
@@ -847,22 +849,33 @@ p.footer-text a{color:#d7d8d8}
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Visit our <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> for source files and to post feedback,
+Visit our <a href="https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot" target="_blank" rel="noopener">GitHub repository</a> for source files and to post feedback,
 report bugs, or submit feature ideas for this Quick Start.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph text-left">
-<p>This Quick Start was created by InterWorks, Inc. in collaboration with Amazon Web Services (AWS). <a href="http://aws.amazon.com/quickstart/" target="_blank" rel="noopener">Quick Starts</a> are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.</p>
+<p>This Quick Start was created by Amazon Web Services (AWS). <a href="http://aws.amazon.com/quickstart/" target="_blank" rel="noopener">Quick Starts</a> are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_overview">Overview</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start is for users who are provisioning resources to connect their Amazon SageMaker AutoPilot models to Tableau workbooks on Tableau Desktop and Server.</p>
+<p>== Overview</p>
+</div>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+This Quick Start creates a solution that enables Tableau users to blend predictions from Amazon SageMaker hosted models into Tableau powered visualizations.This solution works with any Tableau product supported by the <a href="https://tableau.github.io/analytics-extensions-api/" target="_blank" rel="noopener">Tableau Analytics Extension</a> which includes Tableau Desktop and Tableau Server.</p>
+</div>
+<div class="paragraph">
+<p>The solution is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, any machine learning (ML) models that are hosted by Amazon SageMaker Hosting Services can be integrated with Tableau through this solution. For models that are not trained using Autopilot, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom model input and output formats.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This guide provides instructions for deploying the SageMaker AutoPilot Quick Start reference architecture on the AWS Cloud.</p>
+</div>
+<div class="paragraph">
+<p>This Quick Start is for users who are provisioning resources to connect their Amazon SageMaker AutoPilot models to Tableau workbooks on Tableau Desktop and Server.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -882,7 +895,30 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <h2 id="_sagemaker_autopilot_tableau_connector_on_aws">SageMaker AutoPilot Tableau Connector on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start deployment guide provides step-by-step instructions for deploying a SageMaker Tableau Analytic Extension, based on Tableau’s Analytics Extension framework for including the analytics and visualization capabilities of Tableau Server on the Amazon Web Services (AWS) Cloud Machine Learning platform, SageMaker AutoPilot. Quick Starts are automated deployments that use AWS CloudFormation templates to launch, configure, and run the AWS compute, network, storage, and other services required to deploy a specific workload on AWS. This Quick Start deploys a serverless application that can be used with Amazon SageMaker and Tableau Server or Tableau Desktop for BI and data visualization capabilities. The Quick Start deployment includes the following:</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+This Quick Start deployment guide provides step-by-step instructions for deploying this solution.</p>
+</div>
+<div class="paragraph">
+<p>Quick Starts are automated deployments that use AWS CloudFormation templates to launch, configure, and run the AWS compute, network, storage, and other services required to deploy a specific workload on AWS. The Quick Start deployment includes the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A REST API that can be connected to from Tableau.</p>
+</li>
+<li>
+<p>A suite of AWS Lambda functions that facilitate connectivity between Amazon SageMaker Hosted endpoints and Tableau.</p>
+</li>
+<li>
+<p>An Amazon Cognito user pool and client that allows for sign up and sign in for users of the solution.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>This Quick Start deploys a serverless application that can be used with Amazon SageMaker and Tableau Server or Tableau Desktop for BI and data visualization capabilities. The Quick Start deployment includes the following:
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
 </div>
 <div class="ulist">
 <ul>
@@ -898,16 +934,8 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 </ul>
 </div>
 <div class="paragraph">
-<p>This Quick Start is for users who would like to connect Amazon SageMaker machine learning with their enterprise reporting solution in Tableau through an AWS-validated architecture. Please know that we may share who uses AWS Quick Starts with the AWS partner that collaborated with AWS on the content of the Quick Start.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cost">Cost</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You are responsible for the cost of the AWS services used while running
-this Quick Start. There is no additional cost for
+<p>== AWS costs
+You are responsible for the cost of the AWS services and any paid third-party licenses used while running this Quick Start. There is no additional cost for
 using the Quick Start.</p>
 </div>
 <div class="paragraph">
@@ -928,16 +956,21 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>== Software licenses
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_software_licenses">Software licenses</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.</p>
 </div>
 <div class="paragraph">
-<p>There is no license required to launch this Quick Start. However to utilize the connector from your Tableau environment a license is required for Tableau Server, or Tableau Desktop.</p>
+<p>There is no license required to launch this Quick Start. However to utilize the solution from your Tableau environment a license is required for Tableau Server, or Tableau Desktop.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>No licenses are required to deploy this Quick Start. To utilize the connector from your Tableau environment a license is required for Tableau Server, or Tableau Desktop. All AWS service resources consumed during the launch of the Quick Start incur AWS service usage costs.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
 </div>
 </div>
 </div>
@@ -945,19 +978,42 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_architecture">Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Deploying this Quick Start with default parameters builds the following SageMaker AutoPilot Tableau Connector environment in the AWS Cloud.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Deploying this Quick Start with default parameters builds the following environment for the SageMaker AutoPilot Tableau Connector solution on AWS.</p>
 </div>
-<div id="architecture1" class="imageblock">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Deploying this Quick Start for a new virtual private cloud (VPC) with
+default parameters builds the following SageMaker AutoPilot environment in the
+AWS Cloud.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div id="architecture1" class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+.Quick Start architecture for <em>SageMaker AutoPilot Tableau Connector</em> on AWS</p>
+</div>
+<div class="imageblock">
 <div class="content">
 <a class="image" href="images/architecture_diagram.png"><img src="images/architecture_diagram.png" alt="Architecture"></a>
 </div>
-<div class="title">Figure 1. Quick Start architecture for <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 1: Quick Start Architecture for SageMaker AutoPilot Tableau Connector on AWS</em></p>
+<p><em>Figure 1: Quick Start Architecture for SageMaker AutoPilot Tableau Connector Solution</em></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/architecture_diagram.png" alt="Architecture" width="100%" height="100%">
+</div>
+<div class="title">Figure 1. Quick Start architecture for SageMaker AutoPilot on AWS</div>
 </div>
 <div class="paragraph">
-<p>As shown in Figure 1, the Quick Start sets up the following:</p>
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div class="paragraph">
+<p>As shown in <a href="#architecture1">[architecture1]</a>, the Quick Start sets up the following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1006,7 +1062,10 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <div class="sect2">
 <h3 id="_specialized_knowledge">Specialized knowledge</h3>
 <div class="paragraph">
-<p>This deployment requires a moderate level of familiarity with AWS services. If you’re new to AWS, visit <a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started with AWS</a> and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">Training and Certification</a>. These sites provide materials for learning how to design, deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
+<p>This deployment requires a moderate level of familiarity with
+AWS services. If you’re new to AWS, see <a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started Resource Center</a>
+and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">AWS Training and Certification</a>. These sites provide materials for learning how to design,
+deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
 <p>This Quick Start assumes familiarity with the following AWS services:</p>
@@ -1052,7 +1111,7 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <div class="sect2">
 <h3 id="_technical_requirements">Technical requirements</h3>
 <div class="paragraph">
-<p>Before you launch the Quick Start, your account must be configured as specified in the following table. Otherwise, deployment might fail.</p>
+<p>Before you launch the Quick Start, review the following information and ensure that your account is properly configured. Otherwise, deployment might fail.</p>
 </div>
 <div class="sect3">
 <h4 id="_resource_quotas">Resource quotas</h4>
@@ -1109,39 +1168,50 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <td class="tableblock halign-left valign-top"><p class="tableblock">API Gateway Domain Name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VPC Endpoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 or 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security Group</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 or 1</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
 <h4 id="_supported_regions">Supported Regions</h4>
+<div class="paragraph">
+<p>This Quick Start supports the following Regions:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>us-east-1 (N. Virginia)</em></p>
+<p>us-east-1 (N. Virginia)</p>
 </li>
 <li>
-<p><em>us-east-2 (Ohio)</em></p>
+<p>us-east-2 (Ohio)</p>
 </li>
 <li>
-<p><em>us-west-1 (N. California)</em></p>
+<p>us-west-1 (N. California)</p>
 </li>
 <li>
-<p><em>us-west-2 (Oregon)</em></p>
+<p>us-west-2 (Oregon)</p>
 </li>
 <li>
-<p><em>eu-north-1 (Stockholm)</em></p>
+<p>eu-north-1 (Stockholm)</p>
 </li>
 <li>
-<p><em>eu-central-1 (Frankfurt)</em></p>
+<p>eu-central-1 (Frankfurt)</p>
 </li>
 <li>
-<p><em>eu-west-1 (Ireland)</em></p>
+<p>eu-west-1 (Ireland)</p>
 </li>
 <li>
-<p><em>eu-west-2 (London)</em></p>
+<p>eu-west-2 (London)</p>
 </li>
 <li>
-<p><em>eu-west-3 (Paris)</em></p>
+<p>eu-west-3 (Paris)</p>
 </li>
 </ul>
 </div>
@@ -1152,7 +1222,7 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html" target="_blank" rel="noopener">Managing AWS Regions</a>.
+Certain Regions are available on an opt-in basis. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html" target="_blank" rel="noopener">Managing AWS Regions</a>.
 </td>
 </tr>
 </table>
@@ -1164,78 +1234,145 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <p>Before launching the Quick Start, you must sign in to the AWS Management Console with IAM permissions for the resources that the templates deploy. The <em>AdministratorAccess</em> managed policy within IAM provides sufficient permissions, although your organization may choose to use a custom policy with more restrictions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html" target="_blank" rel="noopener">AWS managed policies for job functions</a>.</p>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_prerequisites">Prerequisites</h3>
-<div class="paragraph">
-<p>Before deploying the SageMaker AutoPilot Tableau Connector on AWS, you must have the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>An AWS Account.</p>
-</li>
-<li>
-<p>A domain managed by Amazon Route 53.</p>
-</li>
-<li>
-<p>An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS region.</p>
-</li>
-</ul>
-</div>
 <div class="sect3">
-<h4 id="_deployment_options">Deployment options</h4>
+<h4 id="_prepare_your_aws_account">Prepare your AWS account</h4>
 <div class="paragraph">
-<p>This Quick Start provides one deployment option:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Deploy a new connector (end-to-end deployment)</strong>. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other infrastructure components.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_deployment_steps">Deployment steps</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This option deploys the SageMaker AutoPilot Tableau Connector in a serverless application running on Amazon API Gateway, AWS Lambda, and Amazon Cognito in the AWS Region you choose when you deploy the Quick Start. Figure 1 shows the standalone architecture.</p>
-</div>
-<div class="sect2">
-<h3 id="_step_1_prepare_an_aws_account">Step 1. Prepare an AWS Account</h3>
-<div class="paragraph">
-<p>If you don’t already have an AWS account, create on at <a href="http://aws.amazon.com" class="bare">http://aws.amazon.com</a> by following the on-screen instructions.</p>
-</div>
-<div class="paragraph">
-<p>Use the region selector in the navigation bar to choose the AWS Region where you want to deploy the SageMaker AutoPilot Tableau Connector on AWS.</p>
+<p>Use the region selector in the navigation bar to choose the AWS Region where you want to deploy the SageMaker AutoPilot Tableau Connector on AWS. The SageMaker AutoPilot Tableau Connector should be deployed to the same region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple regions, the recommended architecture is to deploy an instance of the connector for each region.</p>
 </div>
 <div class="paragraph">
 <p>Create an SSL Certificate in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select <strong>provision certificates</strong> or <strong>request a certificate</strong>. In the configuration pane type the domain name you plan to utilize for the connector (Optional) provision this as a wildcard cert for subdomains.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_step_2_launch_the_quick_start">Step 2. Launch the Quick Start</h3>
+<div class="sect3">
+<h4 id="_deployment_options">Deployment options</h4>
 <div class="paragraph">
-<p>This AWS CloudFormation stack takes approximately 15 minutes to create. This template is launched in the US-West (Oregon) region by default. You can change the region to match what you selected in step 1 by using the region selector in the navigation bar. You can also download the templates to use as a starting point for your own implementation.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+# Deployment Options</p>
 </div>
 <div class="paragraph">
-<p>When you finish customizing the parameters, choose Next.</p>
+<p>This Quick Start provides three deployment option:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Deploy a new solution (end-to-end deployment) into a New VPC^</strong>. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other networking components.</p>
+</li>
+<li>
+<p><strong>Deploy a new solution into an existing VPC</strong>. This option deploys the solutions resources into an existing VPC.</p>
+</li>
+<li>
+<p><strong>Deploy a new solution into no VPC</strong>. This option deploys the solutions resources into the AWS Cloud, but not in a VPC.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>This Quick Start provides two deployment options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Deploy a new SageMaker AutoPilot Tableau Connector</strong>. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other infrastructure components.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div class="paragraph">
+<p>== Deployment steps
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+</div>
+<div class="paragraph">
+<p>This option deploys the SageMaker AutoPilot Tableau Connector into an existing VPC in the AWS Region you choose when you deploy the Quick Start. Figure 2 shows the standalone architecture.</p>
+</div>
+<div id="architecture_existing_vpc" class="imageblock">
+<div class="content">
+<a class="image" href="images/vpc_architecture_diagram.png"><img src="images/vpc_architecture_diagram.png" alt="Architecture"></a>
+</div>
+<div class="title">Figure 2. VPC Quick Start architecture for <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sign_in_to_your_aws_account">Sign in to your AWS account</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sign in to your AWS account at <a href="https://aws.amazon.com" class="bare">https://aws.amazon.com</a> with an IAM user role that has the necessary permissions. For details, see <a href="#_planning_the_deployment">Planning the deployment</a> earlier in this guide.</p>
+</li>
+<li>
+<p>Make sure that your AWS account is configured correctly, as discussed in the <a href="#_technical_requirements">Technical requirements</a> section.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_launch_the_quick_start">Launch the Quick Start</h3>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+This AWS CloudFormation stack takes approximately 20 minutes to create. This template is launched in the US-West (Oregon) region by default. You can change the region to match what you selected in step 1 by using the region selector in the navigation bar. You can also download the templates to use as a starting point for your own implementation.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Each deployment takes about 15 minutes to complete.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sign in to your AWS account, and choose <em>Deploy SageMaker AutoPilot Tableau Connector</em> to launch the AWS CloudFormation template.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Submit your VPC details into the relevant parameters to ensure launch into the VPC is successful.</p>
 </div>
 <div class="paragraph">
 <p>On the Options page, specify tags (key-value pairs) for resources in your stack and set advanced options. When you’re done, choose Next.</p>
 </div>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 75%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_permalink" target="_blank" rel="noopener">Deploy SageMaker AutoPilot Tableau Connector</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_template_permalink" target="_blank" rel="noopener">View template</a></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>On the Review page, review and confirm the template settings. Under Capabilities, acknowledge that the template will create IAM resources.</p>
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the network infrastructure for SageMaker AutoPilot is built. The template is launched in the us-east-1 Region by default. For other choices, see <a href="#_supported_regions">Supported Regions</a> earlier in this guide.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Choose Create to deploy the stack</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Choose Create to deploy the stack</p>
 </div>
 <div class="paragraph">
 <p>Monitor the status of the stack. When the status is CREATE_COMPLETE, the deployment is complete.</p>
+</div>
+<div class="paragraph">
+<p>Navigate to the Resources section and find the SolutionSG Security Group. This Security Group is open to the world by default, after testing successful deployment of the solution modify the inbound &amp; outbound rules here to ensure they are in line with security policies for your VPC.</p>
 </div>
 <div class="paragraph">
 <p>Use the information displayed in the Outputs tab for the stack to view the resources that were created. The AWS CloudFormation template for SageMaker AutoPilot Tableau Connector creates the following outputs:</p>
@@ -1243,10 +1380,10 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <div class="ulist">
 <ul>
 <li>
-<p><em>UserPoolDomain</em> – A URL for Cognito to sign up &amp; sign in users of the connector</p>
+<p><em>UserPoolDomain</em> – A URL for Cognito to sign up &amp; sign in users of the solution</p>
 </li>
 <li>
-<p><em>SageMakerTableauApi</em> – A URL for users to connect to the connector from Tableau</p>
+<p><em>SageMakerTableauApi</em> – A URL for users to connect to the solution from Tableau</p>
 </li>
 </ul>
 </div>
@@ -1257,11 +1394,113 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <p>Navigate to the URL for the UserPoolDomain output, and sign up a user</p>
 </div>
 <div class="paragraph">
-<p>Sign in to the connector at the Cognito UserPoolDomain with the credentials of your newly provisioned user</p>
+<p>Sign in to the solution at the Cognito UserPoolDomain with the credentials of your newly provisioned user</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_4_optional_testing_from_tableau">Step 4. (Optional) Testing from Tableau</h3>
+<div class="paragraph">
+<p>Open Tableau Desktop (Version 2020.1 or newer)</p>
+</div>
+<div class="paragraph">
+<p><strong>Help</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Settings &amp; Performance</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Manage Analytics Extension Connection</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Server</strong>: <em>TabPy /External API</em></p>
+</li>
+<li>
+<p><strong>Server</strong>:</p>
+</li>
+<li>
+<p><strong>Port</strong>: <em>443</em></p>
+</li>
+<li>
+<p><strong>Sign in with a username and password</strong>: <em>yes</em></p>
+</li>
+<li>
+<p><strong>Require SSL</strong>: <em>yes</em></p>
+</li>
+</ul>
+</div>
+<div id="tableau2" class="imageblock">
+<div class="content">
+<a class="image" href="images/tableau_connection.png"><img src="images/tableau_connection.png" alt="TableauConnection"></a>
+</div>
+<div class="title">Figure 3. Connectivity from Tableau for the <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>On the <strong>Create stack</strong> page, keep the default setting for the template URL, and then choose <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <strong>Specify stack details</strong> page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the <a href="#_parameter_reference">Parameter reference</a> section of this guide. When you finish reviewing and customizing the parameters, choose <strong>Next</strong>.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>On the <strong>Configure stack options</strong> page, you can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html" target="_blank" rel="noopener">specify tags</a> (key-value pairs) for resources in your stack and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html" target="_blank" rel="noopener">set advanced options</a>. When you’re finished, choose <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <strong>Review</strong> page, review and confirm the template settings. Under <strong>Capabilities</strong>, select the two check boxes to acknowledge that the template creates IAM resources and might require the ability to automatically expand macros.</p>
+</li>
+<li>
+<p>Choose <strong>Create stack</strong> to deploy the stack.</p>
+</li>
+<li>
+<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the SageMaker AutoPilot deployment is ready.</p>
+</li>
+<li>
+<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">Figure 4</a>, to view the created resources.</p>
+</li>
+</ol>
+</div>
+<div id="cfn_outputs" class="imageblock">
+<div class="content">
+<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="100%" height="100%"></a>
+</div>
+<div class="title">Figure 4. SageMaker AutoPilot outputs after successful deployment</div>
+</div>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+= Additional Information</p>
+</div>
+<div class="paragraph">
+<p>== Deploy without a VPC</p>
+</div>
+<div class="paragraph">
+<p>The deployment steps describe how to deploy the solution into an AWS VPC, new or existing. To deploy the solution without a VPC set the parameter "LaunchToVpc" to "No" when launching the Quick Start.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_deployment">Test the deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Navigate to the URL for the UserPoolDomain output, and sign up a user
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
+</div>
+<div class="paragraph">
+<p>Sign in to the connector at the Cognito UserPoolDomain with the credentials of your newly provisioned user</p>
+</div>
+<div class="sect2">
+<h3 id="_optional_testing_from_tableau">(Optional) Testing from Tableau</h3>
 <div class="paragraph">
 <p>Open Tableau Desktop (Version 2020.1 or newer)</p>
 </div>
@@ -1297,72 +1536,37 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <div class="content">
 <a class="image" href="images/tableau_connection.png"><img src="images/tableau_connection.png" alt="TableauConnection"></a>
 </div>
-<div class="title">Figure 2. Connectivity from Tableau for the <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
-</div>
-<div class="paragraph">
-<p>In the following tables, parameters are listed by category and described separately for the deployment options. When you finish reviewing and customizing the parameters, choose <strong>Next</strong>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Unless you are customizing the Quick Start templates for your own deployment projects, keep the default settings for the parameters <strong>Quick Start S3 bucket name</strong>, <strong>Quick Start S3 bucket Region</strong>, and <strong>Quick Start S3 key prefix</strong>. Changing these settings automatically updates code references to point to a new Quick Start location. For more information, see the <a href="https://aws-quickstart.github.io/option1.html" target="_blank" rel="noopener">AWS Quick Start Contributor’s Guide</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><em>This is a placeholder to represent generated parameters. This will be automatically generated and overwritten when documentation is built.</em></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
-<li>
-<p>On the <strong>Configure stack options</strong> page, you can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html" target="_blank" rel="noopener">specify tags</a> (key-value pairs) for resources in your stack and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html" target="_blank" rel="noopener">set advanced options</a>. When you’re finished, choose <strong>Next</strong>.</p>
-</li>
-<li>
-<p>On the <strong>Review</strong> page, review and confirm the template settings. Under <strong>Capabilities</strong>, select the two check boxes to acknowledge that the template creates IAM resources and might require the ability to automatically expand macros.</p>
-</li>
-<li>
-<p>Choose <strong>Create stack</strong> to deploy the stack.</p>
-</li>
-<li>
-<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the SageMaker AutoPilot Tableau Connector deployment is ready.</p>
-</li>
-<li>
-<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">SageMaker AutoPilot Tableau Connector outputs after successful deployment</a>, to view the created resources.</p>
-</li>
-</ol>
-</div>
-<div id="cfn_outputs" class="imageblock">
-<div class="content">
-<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="100%" height="100%"></a>
-</div>
-<div class="title">Figure 3. SageMaker AutoPilot Tableau Connector outputs after successful deployment</div>
+<div class="title">Figure 5. Connectivity from Tableau for the <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_best_practices_for_using_sagemaker_autopilot_tableau_connector_on_aws">Best practices for using SageMaker AutoPilot Tableau Connector on AWS</h2>
+<h2 id="_best_practices_for_using_sagemaker_autopilot_on_aws">Best practices for using SageMaker AutoPilot on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>While using the SageMaker AutoPilot Tableau Connector it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The connector allows end users to utilize their SageMaker Machine Learning models inside of Tableau’s Table Calculations. For effective use of the connector, end users are to pass data from Tableau Table Calculations at the granularity the SageMaker model is expecting to receive (no aggregation, translation, etc).</p>
+<p>While using the SageMaker AutoPilot Tableau Connector solution, it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The solution allows Tableau end users to use any ML model that is hosted on Amazon SageMaker through Tableau’s Table Calculations. End users are responsible to pass data from Tableau Table Calculations at the granularity expected by the SageMaker hotsted model (no aggregation, translation, etc).</p>
 </div>
 <div class="paragraph">
-<p>The connector can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. For the SageMaker AutoPilot Tableau Connector, the syntax of these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)</p>
+<p>The SageMaker AutoPilot Tableau Connector solution can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)</p>
 </div>
-<div id="tableau2" class="imageblock">
+<div id="tableau_additionalinfo" class="imageblock">
 <div class="content">
 <a class="image" href="images/tableau_calculations.png"><img src="images/tableau_calculations.png" alt="TableauCalc"></a>
 </div>
-<div class="title">Figure 4. Calculation Syntax for <em>SageMaker AutoPilot Tableau Connector</em> on AWS</div>
+<div class="title">Figure 6. Calculation Syntax for mapping a data source in Tableau to the input schema of an Amazon SageMaker hosted model.</div>
 </div>
 <div class="paragraph">
-<p>Notes about drafting calculations for the SageMaker AutoPilot Tableau Connector:</p>
+<p>Notes about drafting calculations:</p>
 </div>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+- Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
+- SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the solution.
+- Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1372,88 +1576,206 @@ Unless you are customizing the Quick Start templates for your own deployment pro
 <p>SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the connector.</p>
 </li>
 <li>
-<p>Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.</p>
+<p>Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 178ebbc7cd44f119812dbc3e40f709f633ae3dbb</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_other_useful_information">Other useful information</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_aws_services">AWS services</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://aws.amazon.com/documentation/cloudformation/">AWS CloudFormation</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/apigateway/">Amazon API Gateway</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_quick_start_reference_deployments">Quick Start reference deployments</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://aws.amazon.com/quickstart/">AWS Quick Start home page</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_github_repository">GitHub Repository</h3>
 <div class="paragraph">
-<p>You can visit our GitHub repository to download the templates and scripts for this Quick
-Start, to post your comments, and to share your customizations with others.</p>
+<p>== Customization</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_send_us_feedback">Send us feedback</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>To post feedback, submit feature ideas, or report bugs, use the <strong>Issues</strong> section of the <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> for this Quick Start. To submit code, see the <a href="https://aws-quickstart.github.io/" target="_blank" rel="noopener">Quick Start Contributor’s Guide</a>.</p>
+<p>It is recommended for users of the SageMaker AutoPilot Tableau Connector solution to use Amazon SageMaker Autopilot to train models, in the event that you are not using an Autopilot trained model it is possible the solution will require customizations. The solution utilizes a Lambda function to translate the Tableau Analytics Extension API call to a format that is compatible with SageMaker endpoints trained with AutoPilot. In the event that you need to apply customizations to the solution, follow these steps.</p>
+</div>
+<div class="paragraph">
+<p>Tableau sends data from the extension in the following format:</p>
+</div>
+<div class="listingblock">
+<div class="title">Tableau Analytics Extension Data Format</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{'_arg1': [37, 40, 56, 45, 46, 55, 52, 45], '_arg2': ['services', 'admin.', 'services', 'services', 'blue-collar', 'retired', 'technician', 'blue-collar'], '_arg3': ['married', 'married', 'married', 'married', 'married', 'single', 'married', 'married'], '_arg4': ['high.school', 'basic.6y', 'high.school', 'basic.9y', 'basic.6y', 'high.school', 'basic.9y', 'basic.9y'], '_arg5': ['no', 'no', 'no', 'unknown', 'unknown', 'no', 'no', 'no'], '_arg6': ['yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes'], '_arg7': ['no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'no'], '_arg8': ['telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone'], '_arg9': ['may', 'may', 'may', 'may', 'may', 'may', 'may', 'may'], '_arg10': ['mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon'], '_arg11': [226, 151, 307, 198, 440, 342, 1666, 225], '_arg12': [1, 1, 1, 1, 1, 1, 1, 2], '_arg13': [999, 999, 999, 999, 999, 999, 999, 999], '_arg14': [0, 0, 0, 0, 0, 0, 0, 0], '_arg15': ['nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent'], '_arg16': [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1], '_arg17': [93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994], '_arg18': [-36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4], '_arg19': [4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857], '_arg20': [5191, 5191, 5191, 5191, 5191, 5191, 5191, 5191]}</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>In the CloudFormation pane showing the solution&#8217;s resources, navigate to the Evaluate Lambda Function.</p>
 </div>
-<div class="sect1">
-<h2 id="_quick_start_reference_deployments_2">Quick Start reference deployments</h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>The Evaluate Lambda Function is authored in Python 3.7, and contains a function titled "create_sagemaker_body". This function facilitates transformation of Tableau&#8217;s JSON, into the following output (text/csv) to be sent to the Amazon SageMaker endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="title">Formatted Data for SageMaker AutoPilot trained model</div>
+<div class="content">
+<pre class="highlight"><code class="language-csv" data-lang="csv">37,services,married,high.school,no,yes,no,telephone,may,mon,226,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+40,admin.,married,basic.6y,no,no,no,telephone,may,mon,151,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+56,services,married,high.school,no,no,yes,telephone,may,mon,307,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+45,services,married,basic.9y,unknown,no,no,telephone,may,mon,198,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+46,blue-collar,married,basic.6y,unknown,yes,yes,telephone,may,mon,440,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+55,retired,single,high.school,no,yes,no,telephone,may,mon,342,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+52,technician,married,basic.9y,no,yes,no,telephone,may,mon,1666,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+45,blue-collar,married,basic.9y,no,yes,no,telephone,may,mon,225,2,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the event that your ML model requires additional transformations, it is not recommended to modify the Lambda functions code. It is best practice to package input pre-processing logic alongside the ML model as an Amazon SageMaker inference pipeline as described in <a href="https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/" target="_blank" rel="noopener">this blog</a>. The input pre-processing logic is responsible for transforming the data format that the Lambda function sends to the SageMaker model endpoint into the format required by the ML model. This allows for additional transformations and presents the opportunity to easily integrate customizations into the functionality of the SageMaker AutoPilot Tableau Connector solution.</p>
+</div>
+<div class="paragraph">
+<p>== Other useful information
+=== AWS services
+* <a href="http://aws.amazon.com/documentation/cloudformation/">AWS CloudFormation</a>
+* <a href="https://docs.aws.amazon.com/apigateway/">Amazon API Gateway</a>
+* <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>
+* <a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
+</div>
+<div class="paragraph">
+<p>== FAQ</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. This setting is under <strong>Advanced</strong> in the AWS CloudFormation console on the <strong>Configure stack options</strong> page. With this setting, the stack’s state is retained, and you can troubleshoot the issue.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for this stack. Delete the stack when you finish troubleshooting.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> I encountered a size-limitation error when I deployed the AWS CloudFormation templates.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
+</div>
+<div class="paragraph">
+<p>== Parameter reference</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unless you are customizing the Quick Start templates for your own deployment projects, we recommend that you keep the default settings for the parameters labeled <code>Quick Start S3 bucket name</code>, <code>Quick Start S3 bucket
+Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parameter settings automatically updates code references to point to a new Quick Start location. For more information, see the <a href="https://aws-quickstart.github.io/option1.html" target="_blank" rel="noopener">AWS Quick Start Contributor’s Guide</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>=== Deploy a new connector
+.Domain configuration</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 11%;">
+<col style="width: 73%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter label (name)</th>
+<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain name to deploy the connector to.
+(<code>DomainName</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain name for SageMaker API. (tableauapi.domain.com)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of your domain&#8217;s hosted zone.
+(<code>HostedZoneId</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Route 53 Hosted Zone for your domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Certificate attached to domain.
+(<code>CertificateARN</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARN of certificate attached to domain.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. AWS Quick Start configuration</caption>
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 11%;">
+<col style="width: 73%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter label (name)</th>
+<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Name
+(<code>QSS3BucketName</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart-interworks-tableau-sagemaker-autopilot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Region
+(<code>QSS3BucketRegion</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-west-2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Key Prefix
+(<code>QSS3KeyPrefix</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>quickstart-resources/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>== Send us feedback</p>
+</div>
+<div class="paragraph">
+<p>To post feedback, submit feature ideas, or report bugs, use the <strong>Issues</strong> section of the <a href="https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot" target="_blank" rel="noopener">GitHub repository</a> for this Quick Start. To submit code, see the <a href="https://aws-quickstart.github.io/" target="_blank" rel="noopener">Quick Start Contributor’s Guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>== Quick Start reference deployments</p>
+</div>
 <div class="paragraph">
 <p>See the <a href="https://aws.amazon.com/quickstart/">AWS Quick Start home page</a>.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_github_repository_2">GitHub repository</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Visit our <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> to download
+<p>== GitHub repository</p>
+</div>
+<div class="paragraph">
+<p>Visit our <a href="https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot" target="_blank" rel="noopener">GitHub repository</a> to download
 the templates and scripts for this Quick Start, to post your comments,
 and to share your customizations with others.</p>
 </div>
 <hr>
+<div class="paragraph">
+<p>== Notices</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_notices">Notices</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>This document is provided for informational purposes only. It represents AWS’s current product offerings and practices as of the date of issue of this document, which are subject to change without notice. Customers are responsible for making their own independent assessment of the information in this document and any use of AWS’s products or services, each of which is provided “as is” without warranty of any kind, whether expressed or implied. This document does not create any warranties, representations, contractual commitments, conditions, or assurances from AWS, its affiliates, suppliers, or licensors. The responsibilities and liabilities of AWS to its customers are controlled by AWS agreements, and this document is not part of, nor does it modify, any agreement between AWS and its customers.</p>
 </div>
 <div class="paragraph">
-<p>The software included with this paper is licensed under the Apache License, version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at <a href="http://aws.amazon.com/apache2.0/" class="bare">http://aws.amazon.com/apache2.0/</a> or in the accompanying "license" file. This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for specific language governing permissions and limitations.</p>
+<p>The software included with this paper is licensed under the Apache License, version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at <a href="http://aws.amazon.com/apache2.0/" target="_blank" rel="noopener">http://aws.amazon.com/apache2.0/</a> or in the accompanying "license" file. This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for specific language governing permissions and limitations.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1461,7 +1783,7 @@ and to share your customizations with others.</p>
 <p class="footer-text">
 <!-- We can use document attributes: -->
 <!-- Generated with Asciidoctor v2.0.12. -->
-<a href="https://aws.amazon.com/privacy/">Privacy</a> | <a href="https://aws.amazon.com/terms/">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates and InterWorks, Inc.. All rights reserved.
+<a href="https://aws.amazon.com/privacy/">Privacy</a> | <a href="https://aws.amazon.com/terms/">Site terms</a> | &copy; 2021, Amazon Web Services, Inc. or its affiliates. All rights reserved.
 </p>
 </body>
 </html>
