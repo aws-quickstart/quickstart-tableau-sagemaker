@@ -97,6 +97,7 @@ Conditions:
   LaunchToVpc: !Equals
     - !Ref LaunchToVpc
     - 'Yes'
+  GovCloudCondition: !Or [!Equals [!Ref 'AWS::Region', 'us-gov-west-1'], !Equals [!Ref 'AWS::Region', 'us-gov-east-1']]
 
 Resources:
   VPCEndpoint:
@@ -128,21 +129,6 @@ Resources:
           FromPort: 443
           ToPort: 443
           CidrIp: 0.0.0.0/0
-  CodeSigningProfile:
-    Type: AWS::Signer::SigningProfile
-    Properties:
-      # Description: Code Signing profile for Amazon SageMaker for Tableau
-      PlatformId: AWSLambda-SHA384-ECDSA
-
-  CodeSigningConfig:
-    Type: AWS::Lambda::CodeSigningConfig
-    Properties:
-      Description: Code Signing for Amazon SageMaker for Tableau
-      AllowedPublishers:
-        SigningProfileVersionArns:
-          - !GetAtt CodeSigningProfile.ProfileVersionArn
-      CodeSigningPolicies:
-        UntrustedArtifactOnDeployment: Enforce
 
   UserPool:
     Type: AWS::Cognito::UserPool
@@ -184,7 +170,6 @@ Resources:
     Properties:
       Domain: !Select [2, !Split [/, !Ref AWS::StackId ]]
       UserPoolId: !Ref UserPool
-
   InfoFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -192,7 +177,6 @@ Resources:
         Bucket: !Ref QSS3BucketName
         Key: !Sub "${QSS3KeyPrefix}scripts/Info/Info.zip"
       Handler: lambda_function.lambda_handler
-      CodeSigningConfigArn: !Ref CodeSigningConfig
       Events:
         InfoGetRequest:
           Type: Api
@@ -212,7 +196,6 @@ Resources:
         Bucket: !Ref QSS3BucketName
         Key: !Sub "${QSS3KeyPrefix}scripts/Evaluate/Evaluate.zip"
       Handler: lambda_function.lambda_handler
-      CodeSigningConfigArn: !Ref CodeSigningConfig
       Policies:
       - Statement:
         - Sid: SageMakerInvokeEndpointPolicy
@@ -249,6 +232,8 @@ Resources:
               Headers:
                 - Authorization
       StageName: prod
+      EndpointConfiguration:
+        Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
       DefinitionBody:
         openapi: "3.0.1"
         info:
@@ -316,7 +301,7 @@ Resources:
       Domain:
        CertificateArn: !Ref CertificateARN
        DomainName: !Ref DomainName
-       EndpointConfiguration: EDGE
+       EndpointConfiguration: REGIONAL
        Route53:
         HostedZoneId: !Ref HostedZoneId
       Variables:
@@ -332,7 +317,6 @@ Resources:
 
         Handler: lambda_function.lambda_handler
         Runtime: python2.7
-        CodeSigningConfigArn: !Ref CodeSigningConfig
         Tracing: Active
         Environment:
             Variables:
