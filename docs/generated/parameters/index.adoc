@@ -1,3 +1,1 @@
-
-=== Deploy a new connector
-include::sagemaker-tableau-connector.adoc[]
+_This is a placeholder to represent generated parameters. This will be automatically generated and overwritten when documentation is built._
