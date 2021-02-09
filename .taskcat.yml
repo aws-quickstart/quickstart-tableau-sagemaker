@@ -12,13 +12,13 @@ project:
   - eu-west-3
 tests:
   default:
-    template: templates/sagemaker-for-tableau-main.template
+    template: templates/sagemaker-tableau-connector.template
     s3_regional_buckets: true
     parameters:
-      AvailabilityZones: $[taskcat_getaz_2]
       DomainName: override
       CertificateARN: override
       HostedZoneId: override
-      QSS3KeyPrefix: "quickstart-interworks-tableau-sagemaker-autopilot/"
-      QSS3BucketName: $[taskcat_autobucket]
-      QSS3BucketRegion: $[taskcat_current_region]
+      AuthDomain: quickstart-testing-the-sagemaker-aws-tableau-connector
+      QSS3KeyPrefix: "quickstart-interworks-tableau-sagemaker-autopilot"
+      QSS3BucketName: "$[taskcat_autobucket]"
+      QSS3BucketRegion: "$[taskcat_current_region]"

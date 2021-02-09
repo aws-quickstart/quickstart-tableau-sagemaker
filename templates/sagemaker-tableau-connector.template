@@ -1,18 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Functions and API for connecting Tableau to SageMaker (qs-1rhg228ne). 
+
 Metadata:
-  QuickStartDocumentation:
-    EntrypointName: "Deploy a new connector"
-    Order: 1
   AWS::CloudFormation::Interface:
     ParameterGroups:
-    - Label: 
-        default: Network configuration
-      Parameters:
-      - LaunchToVpc
-      - VpcId
-      - SubnetIds
     - Label:
         default: Domain configuration
       Parameters:
@@ -26,12 +18,6 @@ Metadata:
       - QSS3BucketRegion
       - QSS3KeyPrefix
     ParameterLabels:
-      LaunchToVpc: 
-        default: Launch to VPC
-      VpcId:
-        default: VPC ID
-      SubnetIds: 
-        default: Subnet IDs
       QSS3KeyPrefix:
         default: Quick Start S3 Key Prefix
       QSS3BucketName:
@@ -39,39 +25,26 @@ Metadata:
       QSS3BucketRegion:
         default: Quick Start S3 Bucket Region
       DomainName:
-        default: Domain Name
+        default: "Domain name to deploy the connector to."
       CertificateARN:
-        default: Certificate ARN
+        default: "Certificate attached to domain."
       HostedZoneId:
-        default: Hosted Zone ID
-  cfn-lint: { config: { ignore_checks: [E9007] } }
+        default: "Id of your domain's hosted zone."
 
 Globals:
   Function:
     Runtime: python3.7
     Timeout: 180
 Parameters:
-  LaunchToVpc:
-    Type: String
-    Description: Choose yes to deploy into a VPC.
-    AllowedValues: 
-      - 'Yes'
-      - 'No'
-  VpcId: 
-    Type: 'AWS::EC2::VPC::Id'
-    Description: The ID of the VPC to deploy the solution to.
-  SubnetIds:
-    Type: 'AWS::EC2::Subnet::Id'
-    Description: The ID of the Subnet to deploy the solution to.
   DomainName:
     Type: String
-    Description: Route 53 Hosted Domain with prefix. (tableauapi.domain.com)
+    Description: Domain name for SageMaker API. (tableauapi.domain.com)
   CertificateARN:
     Type: String
     Description: ARN of certificate attached to domain.
   HostedZoneId:
     Type: 'AWS::Route53::HostedZone::Id'
-    Description: Route 53 Hosted Zone ID for your domain.
+    Description: Route 53 Hosted Zone for your domain.
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -87,63 +60,16 @@ Parameters:
     Description: 'The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.'
     Type: String
   QSS3KeyPrefix:
-    AllowedPattern: ^([0-9a-zA-Z-.]+/)*$
-    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots (.) and forward slash (/). The prefix should end with a forward slash (/).
-    Default: quickstart-linux-bastion/
-    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots (.) and forward slash (/) and it should end with a forward slash (/).
+    AllowedPattern: ^[0-9a-zA-Z-/]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), and forward slash (/).
+    Default: quickstart-resources/
+    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), and
+      forward slash (/).
     Type: String
 
-Conditions:
-  LaunchToVpc: !Equals
-    - !Ref LaunchToVpc
-    - 'Yes'
-
 Resources:
-  VPCEndpoint:
-    Condition: LaunchToVpc
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcId: !Ref VpcId
-      VpcEndpointType: Interface
-      SubnetIds: 
-        - !Ref SubnetIds
-      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.sagemaker.runtime'
-      SecurityGroupIds:
-        - !Ref SolutionSG
-
-  SolutionSG:
-    Condition: LaunchToVpc
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      VpcId: !Ref VpcId
-      GroupDescription: SG for Amazon SageMaker for Tableau Quick Start
-      GroupName: SageMakerForTableau
-      SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 0.0.0.0/0
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 0.0.0.0/0
-  CodeSigningProfile:
-    Type: AWS::Signer::SigningProfile
-    Properties:
-      # Description: Code Signing profile for Amazon SageMaker for Tableau
-      PlatformId: AWSLambda-SHA384-ECDSA
-
-  CodeSigningConfig:
-    Type: AWS::Lambda::CodeSigningConfig
-    Properties:
-      Description: Code Signing for Amazon SageMaker for Tableau
-      AllowedPublishers:
-        SigningProfileVersionArns:
-          - !GetAtt CodeSigningProfile.ProfileVersionArn
-      CodeSigningPolicies:
-        UntrustedArtifactOnDeployment: Enforce
-
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -156,9 +82,7 @@ Resources:
       - email
       Policies:
         PasswordPolicy:
-          MinimumLength: 8
-          RequireNumbers: true
-          RequireSymbols: true          
+          MinimumLength: 6
   UserPoolTokenClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
@@ -184,15 +108,13 @@ Resources:
     Properties:
       Domain: !Select [2, !Split [/, !Ref AWS::StackId ]]
       UserPoolId: !Ref UserPool
-
   InfoFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri:
         Bucket: !Ref QSS3BucketName
-        Key: !Sub "${QSS3KeyPrefix}scripts/Info/Info.zip"
+        Key: !Sub "${QSS3KeyPrefix}/scripts/Info/Info.zip"
       Handler: lambda_function.lambda_handler
-      CodeSigningConfigArn: !Ref CodeSigningConfig
       Events:
         InfoGetRequest:
           Type: Api
@@ -200,26 +122,15 @@ Resources:
             RestApiId: !Ref SageMakerApi
             Path: /info
             Method: get
-      VpcConfig:
-        SecurityGroupIds: 
-          - !If [LaunchToVpc, !Ref SolutionSG, !Ref "AWS::NoValue"]
-        SubnetIds:
-          - !If [LaunchToVpc, !Ref SubnetIds, !Ref "AWS::NoValue"]
   EvaluateFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri:
         Bucket: !Ref QSS3BucketName
-        Key: !Sub "${QSS3KeyPrefix}scripts/Evaluate/Evaluate.zip"
+        Key: !Sub "${QSS3KeyPrefix}/scripts/Evaluate/Evaluate.zip"
       Handler: lambda_function.lambda_handler
-      CodeSigningConfigArn: !Ref CodeSigningConfig
       Policies:
-      - Statement:
-        - Sid: SageMakerInvokeEndpointPolicy
-          Effect: Allow
-          Action:
-          - sagemaker:InvokeEndpoint
-          Resource: '*'
+      - AmazonSageMakerFullAccess
       Events:
         EvaluatePostRequest:
           Type: Api
@@ -229,11 +140,6 @@ Resources:
             RestApiId: !Ref SageMakerApi
             Path: /evaluate
             Method: post
-      VpcConfig:
-        SecurityGroupIds: 
-          - !If [LaunchToVpc, !Ref SolutionSG, !Ref "AWS::NoValue"]
-        SubnetIds:
-          - !If [LaunchToVpc, !Ref SubnetIds, !Ref "AWS::NoValue"]
   SageMakerApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -328,11 +234,10 @@ Resources:
       Properties:
         CodeUri:
           Bucket: !Ref QSS3BucketName
-          Key: !Sub "${QSS3KeyPrefix}scripts/Authorizer/Authorizer.zip"
+          Key: !Sub "${QSS3KeyPrefix}/scripts/Authorizer/Authorizer.zip"
 
         Handler: lambda_function.lambda_handler
         Runtime: python2.7
-        CodeSigningConfigArn: !Ref CodeSigningConfig
         Tracing: Active
         Environment:
             Variables:
