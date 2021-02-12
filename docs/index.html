@@ -815,7 +815,7 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_deploy_without_a_vpc">Deploy without a VPC</a></li>
 <li><a href="#_best_practices_for_using_sagemaker_autopilot_tableau_connector_on_aws">Best practices for using SageMaker AutoPilot Tableau Connector on AWS</a></li>
 <li><a href="#_customization">Customization</a></li>
-<li><a href="#_addtional_information">Addtional information</a>
+<li><a href="#_additional_information_2">Additional information</a>
 <ul class="sectlevel2">
 <li><a href="#_aws_services">AWS services</a></li>
 <li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
@@ -874,10 +874,10 @@ report bugs, or submit feature ideas for this Quick Start.
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start creates a solution that enables Tableau users to blend predictions from Amazon SageMaker hosted models into Tableau powered visualizations.This solution works with any Tableau product supported by the <a href="https://tableau.github.io/analytics-extensions-api/" target="_blank" rel="noopener">Tableau Analytics Extension</a> which includes Tableau Desktop and Tableau Server.</p>
+<p>This Quick Start deploys a solution that enables Tableau users to blend predictions from Amazon SageMaker hosted models into Tableau-powered visualizations. This deployment works with any Tableau product supported by the <a href="https://tableau.github.io/analytics-extensions-api/" target="_blank" rel="noopener">Tableau Analytics Extension</a>, which includes Tableau Desktop and Tableau Server.</p>
 </div>
 <div class="paragraph">
-<p>The solution is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, any machine learning (ML) models that are hosted by Amazon SageMaker Hosting Services can be integrated with Tableau through this solution. For models that are not trained using Autopilot, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom model input and output formats.</p>
+<p>The deployment is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, it supports integration of any machine learning (ML) models hosted by Amazon SageMaker Hosting Services can be integrated with Tableau. For models not trained with Autopilot, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom-model input and output formats.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -897,7 +897,7 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <h2 id="_sagemaker_autopilot_tableau_connector_on_aws">SageMaker AutoPilot Tableau Connector on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start is for users who want to leverage Amazon SageMaker machine learning (ML) models directly within their Tableau dashboards. Using a Cloud template, it deploys a SageMaker Tableau Analytic Extension based on Tableau’s Analytics Extension framework. This allows you to including the analytics and visualization capabilities of Tableau Server SageMaker AutoPilot.</p>
+<p>This Quick Start is for users who want to leverage Amazon SageMaker Autopilot machine learning (ML) models directly within their Tableau dashboards. Using a Cloud template, it deploys a SageMaker Tableau Analytic Extension based on Tableau’s Analytics Extension framework. This allows you to including the analytics and visualization capabilities of Tableau Server SageMaker AutoPilot.</p>
 </div>
 <div class="paragraph">
 <p>The serverless application this Quick Start deploys uses AWS best practices for security and high availability, and includes the following:</p>
@@ -908,7 +908,7 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <p>A REST API to which Tableau can connect.</p>
 </li>
 <li>
-<p>AWS Lambda functions to facilitate connectivity between Amazon Sagemaker AutoPilot and Tableau.</p>
+<p>AWS Lambda functions to facilitate connectivity between Autopilot and Tableau.</p>
 </li>
 <li>
 <p>Amazon Cognito for simple and secure user sign-in and authentication.</p>
@@ -976,7 +976,7 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <div class="ulist">
 <ul>
 <li>
-<p>Amazon API Gateway to maintain and secure a REST API containing two endpoints (info and evaluate). The API facilitates connection between Tableau and Amazon SageMaker AutoPilot. Together with AWS Lambda, API Gateway forms the app-facing part of the deployed AWS serverless infrastructure.</p>
+<p>Amazon API Gateway to maintain and secure a REST API containing two endpoints (info and evaluate). The API facilitates connection between Tableau and Amazon SageMaker Autopilot. Together with AWS Lambda, API Gateway forms the app-facing part of the deployed AWS serverless infrastructure.</p>
 </li>
 <li>
 <p>In the Authentication group:</p>
@@ -1010,35 +1010,7 @@ and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">AW
 deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start assumes familiarity with the following AWS services:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://aws.amazon.com/documentation/acm/">AWS Certificate Manager</a></p>
-</li>
-<li>
-<p><a href="http://aws.amazon.com/documentation/cloudformation/">AWS CloudFormation</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/apigateway/">Amazon API Gateway</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/sagemaker/">Amazon SageMaker</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/route53/">Amazon Route 53</a></p>
-</li>
-</ul>
+<p>This Quick Start assumes familiarity with the AWS services listed in the <a href="#_additional_information">Additional information</a> section, later in this guide.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1185,13 +1157,13 @@ Certain Regions are available on an opt-in basis. For more information, see <a h
 <div class="ulist">
 <ul>
 <li>
-<p>An AWS Account.</p>
+<p>An AWS account.</p>
 </li>
 <li>
 <p>A domain managed by Amazon Route 53.</p>
 </li>
 <li>
-<p>An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS region.</p>
+<p>An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS Region.</p>
 </li>
 </ul>
 </div>
@@ -1203,7 +1175,7 @@ Certain Regions are available on an opt-in basis. For more information, see <a h
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Deploy a new connector (end-to-end deployment)</strong>. This option builds a new AWS environment consisting of the API, lambda functions, identity provider, and other infrastructure components.</p>
+<p><strong>Deploy a new connector (end-to-end deployment)</strong>. This option builds a new AWS environment consisting of an API, AWS Lambda functions, identity provider, and other infrastructure components.</p>
 </li>
 </ul>
 </div>
@@ -1222,7 +1194,7 @@ Certain Regions are available on an opt-in basis. For more information, see <a h
 <p>If you don’t already have an AWS account, create one at <a href="http://aws.amazon.com" class="bare">http://aws.amazon.com</a> by following the on-screen instructions.</p>
 </li>
 <li>
-<p>Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region.</p>
+<p>Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region.</p>
 </li>
 <li>
 <p>Create an SSL Certificate in the us-east-1 region. To do this, refer to <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html#request-public-console">Request a Public Certificate Using the Console</a>.</p>
@@ -1298,21 +1270,22 @@ You are responsible for the cost of the AWS services used while running this Qui
 <p>SageMakerTableauApi: The URL for users to connect to the solution from Tableau.</p>
 </li>
 <li>
-<p>UserPoolDomain: The URL for Amazon Cognito to sign up &amp; sign in users of the solution.</p>
+<p>UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic" start="10">
+<li>
 <p>Navigate to the <strong>Resources</strong> tab and find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the group as necessary to ensure they conform to your VPC security policies.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_test_the_deployment">Step 3. Test the Deployment</h3>
 <div class="paragraph">
-<p>To test the deployment, navigate to the UserPoolDomain URL displayed in the <strong>Outputs</strong> tab, and sign up a user</p>
-</div>
-<div class="paragraph">
-<p>Sign in to the solution at the Cognito UserPoolDomain with the credentials of your newly provisioned user</p>
+<p>To test the deployment, navigate to the UserPoolDomain URL displayed in the <strong>Outputs</strong> tab, and sign up as a user. Then, sign in using the new credentials.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1439,12 +1412,15 @@ You are responsible for the cost of the AWS services used while running this Qui
 </div>
 </div>
 <div class="sect1">
-<h2 id="_addtional_information">Addtional information</h2>
+<h2 id="_additional_information_2">Additional information</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_aws_services">AWS services</h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="http://aws.amazon.com/documentation/acm/">AWS Certificate Manager</a></p>
+</li>
 <li>
 <p><a href="http://aws.amazon.com/documentation/cloudformation/">AWS CloudFormation</a></p>
 </li>
@@ -1456,6 +1432,15 @@ You are responsible for the cost of the AWS services used while running this Qui
 </li>
 <li>
 <p><a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/sagemaker/">Amazon SageMaker</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/cognito/">Amazon Cognito</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/route53/">Amazon Route 53</a></p>
 </li>
 </ul>
 </div>
@@ -1473,8 +1458,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="sect2">
 <h3 id="_github_repository">GitHub repository</h3>
 <div class="paragraph">
-<p>You can visit our GitHub repository to download the templates and scripts for this Quick
-Start, to post your comments, and to share your customizations with others.</p>
+<p>You can visit our GitHub repository to download the templates and scripts for this Quick Start, to post your comments, and to share your customizations with others.</p>
 </div>
 </div>
 </div>

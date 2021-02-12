@@ -3,7 +3,7 @@
 
 . If you don’t already have an AWS account, create one at http://aws.amazon.com by following the on-screen instructions. 
 
-. Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
+. Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
 
 . Create an SSL Certificate in the us-east-1 region. To do this, refer to https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html#request-public-console[Request a Public Certificate Using the Console]. 
 
@@ -18,3 +18,5 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 . Check the Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the Quick Start infrastructure is built. The template for this Quick Start is launched in the US-West (Oregon) Region by default. You can also download the templates to use as a starting point for your own implementation.
 . On the *Select Template* page, keep the default setting for the template URL, and then choose *Next*.
 . On the *Specify Details* page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the link:#_parameter_reference[Parameter reference] section of this guide. After reviewing and customizing the parameters, choose *Next*.
+
+NOTE: To deploy without a VPC, set the parameter *LaunchToVpc* to *No*.

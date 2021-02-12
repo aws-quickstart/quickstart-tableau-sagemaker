@@ -1,23 +1,20 @@
 As shown in <<cfn_outputs>>, the AWS CloudFormation template for {partner-product-name} creates the following outputs:
 
-* SageMakerTableauApi: The URL for users to connect to the solution from Tableau.
-* UserPoolDomain: The URL for Amazon Cognito to sign up & sign in users of the solution.
+* SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
+* UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
 
-Navigate to the *Resources* tab and find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the group as necessary to ensure they conform to your VPC security policies.
+[start=10]
+. Navigate to the *Resources* tab and find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the group as necessary to ensure they conform to your VPC security policies.
 
 === Step 3. Test the Deployment
 
-To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up a user
+To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, test signing in using the new credentials.
 
-Sign in to the solution at the Cognito UserPoolDomain with the credentials of your newly provisioned user
+=== Step 4. (Optional) Testing from Tableau (Version 2020.1 or later)
 
-=== Step 4. (Optional) Testing from Tableau
+[start=1]
+. In Tableau Desktop, choose *Help*, *Settings & Performance*, *Manage Analytics Extension Connection*. 
 
-Open Tableau Desktop (Version 2020.1 or newer)
-
-*Help*
-
-*Settings & Performance*
 
 *Manage Analytics Extension Connection*
 
@@ -33,11 +30,6 @@ Open Tableau Desktop (Version 2020.1 or newer)
 image::../images/tableau_connection.png[TableauConnection]
 
 = Additional Information
-
-== Deploy without a VPC
-
-The deployment steps describe how to deploy the solution into an AWS VPC, new or existing. To deploy the solution without a VPC set the parameter "LaunchToVpc" to "No" when launching the Quick Start. 
-
 
 == Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
@@ -88,7 +80,7 @@ The Evaluate Lambda Function is authored in Python 3.7, and contains a function 
 
 In the event that your ML model requires additional transformations, it is not recommended to modify the Lambda functions code. It is best practice to package input pre-processing logic alongside the ML model as an Amazon SageMaker inference pipeline as described in https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[this blog^]. The input pre-processing logic is responsible for transforming the data format that the Lambda function sends to the SageMaker model endpoint into the format required by the ML model. This allows for additional transformations and presents the opportunity to easily integrate customizations into the functionality of the {partner-product-name} solution. 
 
-== Additional information
+== References
 
 === AWS services
  * http://aws.amazon.com/documentation/acm/[AWS Certificate Manager]
