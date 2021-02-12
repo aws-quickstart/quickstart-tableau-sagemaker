@@ -1,16 +1,16 @@
 // Replace the <n> in each row to specify the number of resources used in this deployment. Remove the rows for resources that aren’t used.
 |===
 |Resource |This deployment uses
-|IAM roles | 3
-|Lambda functions | 3
-|Lambda permission | 3
+|AWS Identity and Access Management (IAM) roles | 3
+|AWS Lambda functions | 3
+|AWS Lambda permissions | 3
 |REST APIs | 1
-|API Gateway Stage | 2
-|Cognito User Pool Domain | 1
-|Cognito User Pool | 1
-|Cognito User Pool Token Client | 1
-|Route53 RecordSet | 1
-|API Gateway Domain Name | 1
-|VPC Endpoint | 0 or 1
-|Security Group | 0 or 1
+|API Gateway stages | 2
+|Amazon Cognito user pool domains | 1
+|Amazon Cognito user pools | 1
+|Amazon Cognito user pool token clients | 1
+|Amazon Route53 record sets | 1
+|API Gateway domain names | 1
+|VPC endpoints | 0 or 1
+|Security groups | 0 or 1
 |===

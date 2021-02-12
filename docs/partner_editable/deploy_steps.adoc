@@ -9,11 +9,11 @@ image::../images/vpc_architecture_diagram.png[Architecture]
 
 === Step 1. Prepare an AWS Account
 
-If you don’t already have an AWS account, create on at http://aws.amazon.com by following the on-screen instructions. 
+. If you don’t already have an AWS account, create one at http://aws.amazon.com by following the on-screen instructions. 
 
-Use the region selector in the navigation bar to choose the AWS Region where you want to deploy the {partner-product-name} on AWS. The {partner-product-name} should be deployed to the same region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple regions, the recommended architecture is to deploy an instance of the solution for each region. 
+. Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker AutoPilot models are deployed. If you have SageMaker AutoPilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
 
-Create an SSL Certificate in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *provision certificates* or *request a certificate*. In the configuration pane type the domain name you plan to use. (Optional) provision this as a wildcard cert for subdomains. 
+. Create an SSL Certificate in the us-east-1 region. To do this, refer to https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html#request-public-console[Request a Public Certificate Using the Console]. 
 
 === Step 2. Launch the Quick Start
 
