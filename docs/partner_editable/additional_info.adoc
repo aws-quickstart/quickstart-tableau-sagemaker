@@ -1,10 +1,9 @@
-As shown in <<cfn_outputs>>, the AWS CloudFormation template for {partner-product-name} creates the following outputs:
+As shown in <<cfn_outputs>>, the AWS CloudFormation template creates the following resources on the *Outputs* tab:
 
 * SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
 * UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
 
-[start=10]
-. Navigate to the *Resources* tab and find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the group as necessary to ensure they conform to your VPC security policies.
+On the *Resources* tab, you find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the SolutionSG security group as necessary to ensure they conform to your VPC security policies. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups].
 
 === Step 3. Test the Deployment
 
@@ -14,18 +13,16 @@ To test the deployment, navigate to the UserPoolDomain URL displayed in the *Out
 
 [start=1]
 . In Tableau Desktop, choose *Help*, *Settings & Performance*, *Manage Analytics Extension Connection*. 
-
-
-*Manage Analytics Extension Connection*
-
- - *Server*: _TabPy /External API_
- - *Server*: 
- - *Port*: _443_
- - *Sign in with a username and password*: _yes_
- - *Require SSL*: _yes_
+. For *Select an Analytics Extension*, choose *TabPy/External API*.
+. For *Server*, ... .
+. For *Port*, enter *443*.
+. Select *Sign in with a username and password*, then enter your credentials in the fields provided.
+. Select *Require SSL*.
+. Choose *Test Connection*.
+. Click *OK*. If successful, the message *Successfully connected to the analytics extension* displays. If unsuccessful, an error message displays.
 
 [#tableau2]
-.Connectivity from Tableau for the _{partner-product-name}_ on AWS
+.Analytics Extension Connection dialog box
 [link=images/tableau_connection.png]
 image::../images/tableau_connection.png[TableauConnection]
 
