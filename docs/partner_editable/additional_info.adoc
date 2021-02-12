@@ -31,20 +31,23 @@ image::../images/tableau_connection.png[TableauConnection]
 == Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-While using the {partner-product-name} deployment, it is important to follow best practices for Tableau Desktop and SageMaker. Tableau users can use any ML model that is hosted on Amazon SageMaker through Tableau Table Calculations. End users are responsible to pass data from Tableau Table Calculations at the granularity expected by the SageMaker hotsted model (no aggregation, translation, etc).
+While using the {partner-product-name} deployment, it is important to follow best practices for Tableau Desktop and SageMaker. Tableau users can use any Amazon SageMaker hosted ML model in Tableau table calculations. However, users should pass data from Tableau table calculations to the analytics extension at the granularity level expected by the model (for example, with no aggregation or translation).
 
-The {partner-product-name} solution can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)
+The {partner-product-name} deployment can be called from Tableau SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau calculated fields. With SCRIPT_ functions, users can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
+
+`Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
 
 [#tableau_additionalinfo]
 .Calculation syntax for mapping a data source in Tableau to the input schema of an Amazon SageMaker hosted model
 [link=images/tableau_calculations.png]
 image::../images/tableau_calculations.png[TableauCalc]
 
-Notes about drafting calculations:
-
-- Script Functions – the function you use in your calculated field must match the return data type of your SageMaker model.
-- SageMaker Hosted Endpoint – the SageMaker model must have a hosted endpoint to use the solution.
-- Fields to pass to model – you must pass from Tableau each field in the dataset, in order, that the SageMaker model is expecting.
+[NOTE]
+====
+- *Script Functions*. The function you use in your calculated field must match the return data type of your SageMaker model.
+- *SageMaker Hosted Endpoint*. The SageMaker model must have a hosted endpoint.
+- *Fields to pass to model*. You must pass each field in the dataset from Tableau, in the order that the SageMaker model is expecting.
+====
 
 == Customization
 

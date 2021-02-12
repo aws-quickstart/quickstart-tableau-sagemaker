@@ -327,3 +327,6 @@ Outputs:
   SageMakerTableauApi:
     Description: "URL for your SageMaker Tableau connector."
     Value: !Ref DomainName
+  Postdeployment:
+    Description: See the deployment guide for post-deployment steps.
+    Value: 
