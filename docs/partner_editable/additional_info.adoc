@@ -1,3 +1,37 @@
+Navigate to the Resources section and find the SolutionSG Security Group. This Security Group is open to the world by default, after testing successful deployment of the solution modify the inbound & outbound rules here to ensure they are in line with security policies for your VPC. 
+
+Use the information displayed in the Outputs tab for the stack to view the resources that were created. The AWS CloudFormation template for {partner-product-name} creates the following outputs:
+
+ - _UserPoolDomain_ – A URL for Cognito to sign up & sign in users of the solution
+ - _SageMakerTableauApi_ – A URL for users to connect to the solution from Tableau
+
+=== Step 3. Test the Deployment
+
+Navigate to the URL for the UserPoolDomain output, and sign up a user
+
+Sign in to the solution at the Cognito UserPoolDomain with the credentials of your newly provisioned user
+
+=== Step 4. (Optional) Testing from Tableau
+
+Open Tableau Desktop (Version 2020.1 or newer)
+
+*Help*
+
+*Settings & Performance*
+
+*Manage Analytics Extension Connection*
+
+ - *Server*: _TabPy /External API_
+ - *Server*: 
+ - *Port*: _443_
+ - *Sign in with a username and password*: _yes_
+ - *Require SSL*: _yes_
+
+[#tableau2]
+.Connectivity from Tableau for the _{partner-product-name}_ on AWS
+[link=images/tableau_connection.png]
+image::../images/tableau_connection.png[TableauConnection]
+
 = Additional Information
 
 == Deploy without a VPC
