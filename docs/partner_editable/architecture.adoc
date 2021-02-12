@@ -1,23 +1,15 @@
-Deploying this Quick Start with default parameters builds the following environment for the {partner-product-name} solution on AWS.
+Deploying this Quick Start with default parameters builds the following {partner-product-name} environment in the AWS Cloud.
 
+:xrefstyle: short
 [#architecture1]
-.Quick Start architecture for _{partner-product-name}_ on AWS
-[link=images/architecture_diagram.png]
-image::../images/architecture_diagram.png[Architecture]
-_Figure 1: Quick Start Architecture for {partner-product-name} Solution_
+.Quick Start architecture for Amazon SageMaker AutoPilot Tableau Connector on AWS
+[link=images/tableau-sagemaker-endpoint-architecture-diagram.png]
+image::../images/tableau-sagemaker-endpoint-architecture-diagram.png[Architecture,width=100%,height=100%]
 
-As shown in Figure 1, the Quick Start sets up the following: 
+As shown in <<architecture1>>, this Quick Start sets up the following:
 
- - AWS Lambda functions
- - Amazon Cognito 
- - Amazon API Gateway
-
-In the Authentication section the Quick Start creates the following:
-
- - An AWS Lambda Authorizer function that connects Amazon API Gateway to Amazon Cognito User Pools for basic authentication.
- - A Cognito User Pool with a managed portal for sign up & sign in of users.
-
-Additionally, the Quick Start creates the following:
-
- - A REST API in Amazon API Gateway that contains two endpoints, info and evaluate to facilitate communication with Tableau and Amazon SageMaker. 
- - Two AWS Lambda functions, one for the info endpoint, and one for the evaluate endpoint. 
+* Amazon API Gateway to maintain and secure a REST API containing two endpoints (info and evaluate). The API facilitates connection between Tableau and Amazon SageMaker AutoPilot. Together with AWS Lambda, API Gateway forms the app-facing part of the deployed AWS serverless infrastructure.
+* In the Authentication group:
+ - An API Gateway Lambda authorizer to control access to REST API resources. When Tableau calls the REST API, API Gateway invokes the Lambda authorizer to validate the caller.
+ - Amazon Cognito providing a managed portal for sign-up and sign-in and a user pool to authenticate users.
+* Two AWS Lambda functions, one for each API Gateway endpoint. When Tableau sends a request to an endpoint (for example, to retrieve a SageMaker inference) API Gateway calls the associated Lambda function.

@@ -3,4 +3,4 @@
 
 This Quick Start provides one deployment option:
 
- - *Deploy a new connector (end-to-end deployment)*. This option builds a new AWS environment consisting of the API, lambda functions, identity provider, and other infrastructure components. 
+ - *Deploy a new connector (end-to-end deployment)*. This option builds a new AWS environment consisting of an API, AWS Lambda functions, identity provider, and other infrastructure components. 

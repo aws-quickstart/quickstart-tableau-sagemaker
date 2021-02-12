@@ -88,17 +88,20 @@ The Evaluate Lambda Function is authored in Python 3.7, and contains a function 
 
 In the event that your ML model requires additional transformations, it is not recommended to modify the Lambda functions code. It is best practice to package input pre-processing logic alongside the ML model as an Amazon SageMaker inference pipeline as described in https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[this blog^]. The input pre-processing logic is responsible for transforming the data format that the Lambda function sends to the SageMaker model endpoint into the format required by the ML model. This allows for additional transformations and presents the opportunity to easily integrate customizations into the functionality of the {partner-product-name} solution. 
 
-== Addtional information
+== Additional information
 
 === AWS services
- - http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
- - https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
- - https://docs.aws.amazon.com/lambda/[AWS Lambda]
- - https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+ * http://aws.amazon.com/documentation/acm/[AWS Certificate Manager]
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+* https://docs.aws.amazon.com/sagemaker/[Amazon SageMaker]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
+* https://docs.aws.amazon.com/route53/[Amazon Route 53]
 
 === Quick Start reference deployments
  - https://aws.amazon.com/quickstart/[AWS Quick Start home page]
 
 === GitHub repository
-You can visit our GitHub repository to download the templates and scripts for this Quick
-Start, to post your comments, and to share your customizations with others. 
+You can visit our GitHub repository to download the templates and scripts for this Quick Start, to post your comments, and to share your customizations with others.
