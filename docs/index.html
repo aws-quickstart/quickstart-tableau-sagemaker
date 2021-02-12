@@ -807,15 +807,14 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_step_1_prepare_an_aws_account">Step 1. Prepare an AWS Account</a></li>
 <li><a href="#_step_2_launch_the_quick_start">Step 2. Launch the Quick Start</a></li>
 <li><a href="#_step_3_test_the_deployment">Step 3. Test the Deployment</a></li>
-<li><a href="#_step_4_optional_testing_from_tableau">Step 4. (Optional) Testing from Tableau</a></li>
+<li><a href="#_step_4_optional_testing_from_tableau_version_2020_1_or_later">Step 4. (Optional) Testing from Tableau (Version 2020.1 or later)</a></li>
 </ul>
 </li>
 <li><a href="#_additional_information">Additional Information</a>
 <ul class="sectlevel1">
-<li><a href="#_deploy_without_a_vpc">Deploy without a VPC</a></li>
 <li><a href="#_best_practices_for_using_sagemaker_autopilot_tableau_connector_on_aws">Best practices for using SageMaker AutoPilot Tableau Connector on AWS</a></li>
 <li><a href="#_customization">Customization</a></li>
-<li><a href="#_additional_information_2">Additional information</a>
+<li><a href="#_references">References</a>
 <ul class="sectlevel2">
 <li><a href="#_aws_services">AWS services</a></li>
 <li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
@@ -951,9 +950,6 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_software_licenses">Software licenses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.</p>
-</div>
-<div class="paragraph">
 <p>There is no license required to launch this Quick Start. However, to use the connector from your Tableau environment, a license is required for Tableau Server or Tableau Desktop.</p>
 </div>
 </div>
@@ -1010,7 +1006,7 @@ and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">AW
 deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start assumes familiarity with the AWS services listed in the <a href="#_additional_information">Additional information</a> section, later in this guide.</p>
+<p>This Quick Start assumes familiarity with the AWS services listed in the <a href="#_references">References</a> section, later in this guide.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1236,6 +1232,18 @@ You are responsible for the cost of the AWS services used while running this Qui
 </li>
 </ol>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To deploy without a VPC, set the parameter <strong>LaunchToVpc</strong> to <strong>No</strong>.
+</td>
+</tr>
+</table>
+</div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
@@ -1267,7 +1275,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="ulist">
 <ul>
 <li>
-<p>SageMakerTableauApi: The URL for users to connect to the solution from Tableau.</p>
+<p>SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.</p>
 </li>
 <li>
 <p>UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.</p>
@@ -1285,19 +1293,17 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="sect2">
 <h3 id="_step_3_test_the_deployment">Step 3. Test the Deployment</h3>
 <div class="paragraph">
-<p>To test the deployment, navigate to the UserPoolDomain URL displayed in the <strong>Outputs</strong> tab, and sign up as a user. Then, sign in using the new credentials.</p>
+<p>To test the deployment, navigate to the UserPoolDomain URL displayed in the <strong>Outputs</strong> tab, and sign up as a user. Then, test signing in using the new credentials.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_4_optional_testing_from_tableau">Step 4. (Optional) Testing from Tableau</h3>
-<div class="paragraph">
-<p>Open Tableau Desktop (Version 2020.1 or newer)</p>
-</div>
-<div class="paragraph">
-<p><strong>Help</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>Settings &amp; Performance</strong></p>
+<h3 id="_step_4_optional_testing_from_tableau_version_2020_1_or_later">Step 4. (Optional) Testing from Tableau (Version 2020.1 or later)</h3>
+<div class="olist arabic">
+<ol class="arabic" start="1">
+<li>
+<p>In Tableau Desktop, choose <strong>Help</strong>, <strong>Settings &amp; Performance</strong>, <strong>Manage Analytics Extension Connection</strong>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p><strong>Manage Analytics Extension Connection</strong></p>
@@ -1331,14 +1337,6 @@ You are responsible for the cost of the AWS services used while running this Qui
 </div>
 </div>
 <h1 id="_additional_information" class="sect0">Additional Information</h1>
-<div class="sect1">
-<h2 id="_deploy_without_a_vpc">Deploy without a VPC</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The deployment steps describe how to deploy the solution into an AWS VPC, new or existing. To deploy the solution without a VPC set the parameter "LaunchToVpc" to "No" when launching the Quick Start.</p>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_best_practices_for_using_sagemaker_autopilot_tableau_connector_on_aws">Best practices for using SageMaker AutoPilot Tableau Connector on AWS</h2>
 <div class="sectionbody">
@@ -1412,7 +1410,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 </div>
 </div>
 <div class="sect1">
-<h2 id="_additional_information_2">Additional information</h2>
+<h2 id="_references">References</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_aws_services">AWS services</h3>

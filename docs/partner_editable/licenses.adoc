@@ -1,5 +1,3 @@
 // Include details about the license and how they can sign up. If no license is required, clarify that. 
 
-You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.
-
 There is no license required to launch this Quick Start. However, to use the connector from your Tableau environment, a license is required for Tableau Server or Tableau Desktop. 

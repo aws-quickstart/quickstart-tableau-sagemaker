@@ -34,7 +34,7 @@ image::../images/tableau_connection.png[TableauConnection]
 == Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-While using the {partner-product-name} solution, it is important to follow best practices for Tableau Desktop, and Amazon SageMaker. The solution allows Tableau end users to use any ML model that is hosted on Amazon SageMaker through Tableau’s Table Calculations. End users are responsible to pass data from Tableau Table Calculations at the granularity expected by the SageMaker hotsted model (no aggregation, translation, etc).
+While using the {partner-product-name} deployment, it is important to follow best practices for Tableau Desktop and SageMaker. Tableau users can use any ML model that is hosted on Amazon SageMaker through Tableau Table Calculations. End users are responsible to pass data from Tableau Table Calculations at the granularity expected by the SageMaker hotsted model (no aggregation, translation, etc).
 
 The {partner-product-name} solution can be called from Tableau’s suite of SCRIPT_ functions (SCRIPT_REAL, SCRIPT_STR, SCRIPT_INT, SCRIPT_BOOL), available inside of Tableau’s calculated fields. The functions allow end users to pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows: Script_Function (‘[SageMaker Hosted Endpoint]’, fields in dataset to pass to model)
 

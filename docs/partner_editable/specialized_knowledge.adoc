@@ -1,1 +1,1 @@
-This Quick Start assumes familiarity with the AWS services listed in the link:#_additional_information[Additional information] section, later in this guide.
+This Quick Start assumes familiarity with the AWS services listed in the link:#_references[References] section, later in this guide.
