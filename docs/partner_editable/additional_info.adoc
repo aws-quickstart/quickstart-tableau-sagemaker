@@ -33,7 +33,7 @@ image::../images/tableau_connection.png[TableauConnection]
 
 While using the {partner-product-name} deployment, it is important to follow Tableau Desktop and SageMaker best practices. You can use any Amazon SageMaker hosted ML model in Tableau table calculations. However, you should pass data from Tableau table calculations to the analytics extension at the granularity level expected by the model (for example, with no aggregation or translation).
 
-The {partner-product-name} deployment can be called with Tableau SCRIPT_ functions `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL`. With these table-calculation functions, you can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
+The {partner-product-name} deployment can be called with Tableau SCRIPT_ functions `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL`. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions], you can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
 
 `Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
 

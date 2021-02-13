@@ -27,7 +27,7 @@ Metadata:
       - QSS3KeyPrefix
     ParameterLabels:
       LaunchToVpc: 
-        default: Launch to VPC
+        default: Launch into VPC
       VpcId:
         default: VPC ID
       SubnetIds: 
