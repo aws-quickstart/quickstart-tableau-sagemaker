@@ -4,6 +4,7 @@ Metadata:
   LICENSE: Apache License, Version 2.0 
   QuickStartDocumentation:
     EntrypointName: Launch into a new VPC
+    Order: 1
   'AWS::CloudFormation::Interface':
     ParameterGroups:
     - Label:

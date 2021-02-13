@@ -4,7 +4,7 @@ Description: Functions and API for connecting Tableau to SageMaker (qs-1rhg228ne
 Metadata:
   QuickStartDocumentation:
     EntrypointName: Launch into existing VPC
-    Order: 1
+    Order: 2
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label: 
