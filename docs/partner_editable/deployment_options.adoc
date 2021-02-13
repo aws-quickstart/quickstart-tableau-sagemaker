@@ -1,8 +1,10 @@
 // There are generally two deployment options. If additional are required, add them here
-# Deployment Options
+// There are generally two deployment options. If additional are required, add them here
 
-This Quick Start provides three deployment option:
+This Quick Start provides three deployment options:
 
- - *Deploy a new solution (end-to-end deployment) into a New VPC^*. This option builds a new AWS environment consisting of the API, Lambda Functions, Identity Provider, and other networking components. 
- - *Deploy a new solution into an existing VPC*. This option deploys the solutions resources into an existing VPC.
- - *Deploy a new solution into no VPC*. This option deploys the solutions resources into the AWS Cloud, but not in a VPC.
+* *Deploy {partner-product-short-name} into a new VPC (end-to-end deployment)*. This option builds a new AWS environment consisting of a VPC, API, AWS Lambda functions, identity provider, and other networking components.
+* *Deploy {partner-product-short-name} into an existing VPC*. This option provisions the deployment resources in your existing AWS VPC.
+* *Deploy {partner-product-short-name} into the AWS Cloud with no VPC*. This option deploys the Quick Start resources into the AWS Cloud, but not into a VPC. To deploy this option, deploy the *Deploy {partner-product-short-name} into an existing VPC* template and set the *Launch into VPC* parameter to *No*. 
+
+The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and other settings, as discussed later in this guide.

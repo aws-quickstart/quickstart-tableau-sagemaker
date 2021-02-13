@@ -4,6 +4,6 @@
 
 Before deploying the {partner-product-name} on AWS, you must have the following:
 
- - An AWS Account.
+ - An AWS account.
  - A domain managed by Amazon Route 53.
- - An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS region.
+ - An SSL certificate managed by AWS Certificate Manager in the us-east-1 AWS Region.

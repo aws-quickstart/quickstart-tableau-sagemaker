@@ -3,8 +3,8 @@ Transform: AWS::Serverless-2016-10-31
 Description: Functions and API for connecting Tableau to SageMaker (qs-1rhg228ne). 
 Metadata:
   QuickStartDocumentation:
-    EntrypointName: "Deploy a new connector"
-    Order: 1
+    EntrypointName: Launch into existing VPC
+    Order: 2
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label: 
@@ -27,23 +27,23 @@ Metadata:
       - QSS3KeyPrefix
     ParameterLabels:
       LaunchToVpc: 
-        default: Launch to VPC
+        default: Launch into VPC
       VpcId:
         default: VPC ID
       SubnetIds: 
         default: Subnet IDs
       QSS3KeyPrefix:
-        default: Quick Start S3 Key Prefix
+        default: Quick Start S3 key prefix
       QSS3BucketName:
-        default: Quick Start S3 Bucket Name
+        default: Quick Start S3 bucket name
       QSS3BucketRegion:
-        default: Quick Start S3 Bucket Region
+        default: Quick Start S3 bucket Region
       DomainName:
-        default: Domain Name
+        default: Domain name
       CertificateARN:
         default: Certificate ARN
       HostedZoneId:
-        default: Hosted Zone ID
+        default: Hosted zone ID
   cfn-lint: { config: { ignore_checks: [E9007] } }
 
 Globals:
@@ -53,25 +53,25 @@ Globals:
 Parameters:
   LaunchToVpc:
     Type: String
-    Description: Choose yes to deploy into a VPC.
+    Description: Choose *Yes* to deploy into a VPC. Choose *No* to deploy into the AWS Cloud without a VPC.
     AllowedValues: 
       - 'Yes'
       - 'No'
   VpcId: 
     Type: 'AWS::EC2::VPC::Id'
-    Description: The ID of the VPC to deploy the solution to.
+    Description: ID of the VPC to deploy into.
   SubnetIds:
     Type: 'AWS::EC2::Subnet::Id'
-    Description: The ID of the Subnet to deploy the solution to.
+    Description: ID of the subnet to deploy into.
   DomainName:
     Type: String
-    Description: Route 53 Hosted Domain with prefix. (tableauapi.domain.com)
+    Description: Route 53 hosted domain, with prefix. For example, tableauapi.domain.com.
   CertificateARN:
     Type: String
-    Description: ARN of certificate attached to domain.
+    Description: ARN of domain certificate.
   HostedZoneId:
     Type: 'AWS::Route53::HostedZone::Id'
-    Description: Route 53 Hosted Zone ID for your domain.
+    Description: Domain Route 53 hosted zone ID.
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -84,7 +84,7 @@ Parameters:
     Type: String
   QSS3BucketRegion:
     Default: 'us-west-2'
-    Description: 'The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.'
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^([0-9a-zA-Z-.]+/)*$
@@ -116,7 +116,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref VpcId
-      GroupDescription: SG for Amazon SageMaker for Tableau Quick Start
+      GroupDescription: SageMaker for Tableau Quick Start security group
       GroupName: SageMakerForTableau
       SecurityGroupEgress:
         - IpProtocol: tcp
@@ -235,7 +235,7 @@ Resources:
         openapi: "3.0.1"
         info:
           title: "APISageMakerTableauConnector"
-          description: "REST API for SageMaker Tableau Connector."
+          description: "REST API for SageMaker Tableau connector."
           version: "2020-11-17T16:10:11Z"
         paths:
           /info:
@@ -322,8 +322,8 @@ Resources:
                 LOG_LEVEL: INFO
 Outputs:
   UserPoolDomain:
-    Description: "URL to sign up & sign in users."
+    Description: URL to sign up and sign in users.
     Value: !Join ['',[https://, !Ref UserPoolDomain, .auth., !Ref AWS::Region, ".amazoncognito.com/login?response_type=code&client_id=", !Ref UserPoolTokenClient, "&redirect_uri=" , https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md ]]
   SageMakerTableauApi:
-    Description: "URL for your SageMaker Tableau connector."
+    Description: URL for your SageMaker Tableau connector.
     Value: !Ref DomainName
