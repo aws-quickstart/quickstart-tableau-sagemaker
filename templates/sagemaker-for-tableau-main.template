@@ -127,7 +127,7 @@ Parameters:
     Description: Amazon Resource Number (ARN) of the domain certificate.
   HostedZoneId:
     Type: 'AWS::Route53::HostedZone::Id'
-    Description: Domain Route 53 hosted zone ID.
+    Description: Route 53 hosted zone ID of the domain.
 
 Conditions:
   UsingDefaultBucket: !Equals

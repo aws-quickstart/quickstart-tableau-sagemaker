@@ -24,6 +24,6 @@
 |===
 |Parameter label (name) |Default value|Description|Domain Name
 (`DomainName`)|`**__Requires input__**`|Route 53 hosted domain, with prefix. For example, tableauapi.domain.com.|Hosted Zone ID
-(`HostedZoneId`)|`**__Requires input__**`|Domain Route 53 hosted zone ID.|Certificate ARN
+(`HostedZoneId`)|`**__Requires input__**`|Route 53 hosted zone ID of the domain.|Certificate ARN
 (`CertificateARN`)|`**__Requires input__**`|Amazon Resource Number (ARN) of the domain certificate.
 |===

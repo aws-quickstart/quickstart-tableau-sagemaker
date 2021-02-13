@@ -4,8 +4,8 @@
 |===
 |Parameter label (name) |Default value|Description|Launch into VPC
 (`LaunchToVpc`)|`**__Requires input__**`|Choose *Yes* to deploy into a VPC. Choose *No* to deploy into the AWS Cloud without a VPC.|VPC ID
-(`VpcId`)|`**__Requires input__**`|VPC ID to deploy into.|Subnet IDs
-(`SubnetIds`)|`**__Requires input__**`|Subnet ID to deploy into.
+(`VpcId`)|`**__Requires input__**`|ID of the VPC to deploy into.|Subnet IDs
+(`SubnetIds`)|`**__Requires input__**`|ID of the subnet to deploy into.
 |===
 .Domain configuration
 [width="100%",cols="16%,11%,73%",options="header",]

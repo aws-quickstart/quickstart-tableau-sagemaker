@@ -1,8 +1,8 @@
 // Change the following attributes.
 :quickstart-project-name: quickstart-interworks-tableau-sagemaker-autopilot
-:partner-product-name: SageMaker AutoPilot Tableau Connector
+:partner-product-name: SageMaker Autopilot Tableau Connector
 // For the following attribute, if you have no short name, enter the same name as partner-product-name.
-:partner-product-short-name: SageMaker Autopilot
+:partner-product-short-name: SageMaker Autopilot Tableau
 // If there's no partner, comment partner-company-name and partner-contributors.
 :partner-company-name: InterWorks Inc.
 :doc-month: February

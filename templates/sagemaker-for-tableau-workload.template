@@ -59,10 +59,10 @@ Parameters:
       - 'No'
   VpcId: 
     Type: 'AWS::EC2::VPC::Id'
-    Description: VPC ID to deploy into.
+    Description: ID of the VPC to deploy into.
   SubnetIds:
     Type: 'AWS::EC2::Subnet::Id'
-    Description: Subnet ID to deploy into.
+    Description: ID of the subnet to deploy into.
   DomainName:
     Type: String
     Description: Route 53 hosted domain, with prefix. For example, tableauapi.domain.com.

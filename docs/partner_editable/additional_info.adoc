@@ -3,13 +3,13 @@ As shown in <<cfn_outputs>>, the AWS CloudFormation template creates the followi
 * SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
 * UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
 
-On the *Resources* tab, you find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the SolutionSG security group as necessary to ensure they conform to your VPC security policies. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups].
+On the *Resources* tab, you find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the SolutionSG security group as necessary to ensure they conform to your VPC security policies. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
 
-=== Step 3. Test the Deployment
+=== Step 3. Test the deployment
 
 To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, test signing in using the new credentials.
 
-=== Step 4. (Optional) Testing from Tableau (Version 2020.1 or later)
+Optionally, you can test from Tableau (version 2020.1 or later) by doing the following:
 
 [start=1]
 . In Tableau Desktop, choose *Help*, *Settings & Performance*, *Manage Analytics Extension Connection*. 
@@ -33,39 +33,39 @@ image::../images/tableau_connection.png[TableauConnection]
 
 While using the {partner-product-name} deployment, it is important to follow Tableau Desktop and SageMaker best practices. You can use any Amazon SageMaker hosted ML model in Tableau table calculations. However, you should pass data from Tableau table calculations to the analytics extension at the granularity level expected by the model (for example, with no aggregation or translation).
 
-The {partner-product-name} deployment can be called with Tableau SCRIPT_ functions `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL`. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions], you can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
+The {partner-product-name} deployment can be called with Tableau SCRIPT_ functions `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL`. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions^], you can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
 
 `Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
 
 [#tableau_additionalinfo]
-.Calculation syntax for mapping a data source in Tableau to the input schema of an Amazon SageMaker hosted model
+.Calculation syntax for mapping a data source in Tableau to the input schema of an SageMaker hosted model
 [link=images/tableau_calculations.png]
 image::../images/tableau_calculations.png[TableauCalc]
 
 [NOTE]
 ====
-- *Script Functions*. The function you use in your calculated field must match the return data type of your SageMaker model.
-- *SageMaker Hosted Endpoint*. The SageMaker model must have a hosted endpoint.
+- *Script functions*. The function you use in your calculated field must match the return data type of your SageMaker model.
+- *SageMaker hosted endpoint*. The SageMaker model must have a hosted endpoint.
 - *Fields to pass to model*. You must pass each field in the dataset from Tableau, in the order that the SageMaker model is expecting.
 ====
 
 == Customization
 
-We recommend that you use Autopilot trained ML models with this deployment. This Quick Start deploys a Lambda function to translate the Tableau analytics extension API call to a format compatible with SageMaker endpoints trained with Autopilot. To use models that are not trained by Autopilot, you may need to customize the deployment.
+We recommend that you use Autopilot trained ML models with this deployment. This Quick Start deploys an AWS Lambda function to translate the Tableau analytics extension API call to a format compatible with SageMaker endpoints trained with Autopilot. To use models that are not trained by Autopilot, you may need to customize the deployment.
 
 Tableau sends data from the analytics extension in the following format:
 
 .Tableau analytics extension data format
+
 [source,json]
 ----
 {'_arg1': [37, 40, 56, 45, 46, 55, 52, 45], '_arg2': ['services', 'admin.', 'services', 'services', 'blue-collar', 'retired', 'technician', 'blue-collar'], '_arg3': ['married', 'married', 'married', 'married', 'married', 'single', 'married', 'married'], '_arg4': ['high.school', 'basic.6y', 'high.school', 'basic.9y', 'basic.6y', 'high.school', 'basic.9y', 'basic.9y'], '_arg5': ['no', 'no', 'no', 'unknown', 'unknown', 'no', 'no', 'no'], '_arg6': ['yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes'], '_arg7': ['no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'no'], '_arg8': ['telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone'], '_arg9': ['may', 'may', 'may', 'may', 'may', 'may', 'may', 'may'], '_arg10': ['mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon'], '_arg11': [226, 151, 307, 198, 440, 342, 1666, 225], '_arg12': [1, 1, 1, 1, 1, 1, 1, 2], '_arg13': [999, 999, 999, 999, 999, 999, 999, 999], '_arg14': [0, 0, 0, 0, 0, 0, 0, 0], '_arg15': ['nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent'], '_arg16': [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1], '_arg17': [93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994], '_arg18': [-36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4], '_arg19': [4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857], '_arg20': [5191, 5191, 5191, 5191, 5191, 5191, 5191, 5191]}
 ----
 
-In the AWS CloudFormation pane showing the solution's resources, navigate to the Evaluate Lambda Function. 
+The evaluate endpoint AWS Lambda function can be found on the *Resources* tab of the AWS CloudFormation console after stack deployment is complete. It is authored in Python 3.7, and contains the function `create_sagemaker_body`. This function facilitates the transformation of Tableau JSON into the following comma-separated text output, sent to the SageMaker endpoint: 
 
-The Lambda function for the evaluate endpoint is authored in Python 3.7. It contains a the function `create_sagemaker_body`. This function facilitates the transformation of Tableau JSON into the following comma-separated text output, sent to the Amazon SageMaker endpoint: 
+.Formatted data for SageMaker Autopilot trained model
 
-.Formatted data for SageMaker AutoPilot trained model
 [source,csv]
 ----
 37,services,married,high.school,no,yes,no,telephone,may,mon,226,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
@@ -78,24 +78,24 @@ The Lambda function for the evaluate endpoint is authored in Python 3.7. It cont
 45,blue-collar,married,basic.9y,no,yes,no,telephone,may,mon,225,2,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
 ----
 
-We do not recommend modifying the AWS Lambda functions code if your ML model needs additional transformations. The best practice is to package input preprocessing logic alongside the ML model as an Amazon SageMaker inference pipeline. For more information, refer to https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[Preprocess input data before making predictions using Amazon SageMaker inference pipelines and Scikit-learn^]. 
+Data sent by the AWS Lambda function to the SageMaker endpoint is transformed by preprocessing logic into the format required by the ML model. This logic accommodates additional data transformations and facilitate integration of {partner-product-short-name} customizations. 
 
-Data sent by the AWS Lambda function to the SageMaker endpoint is transformed by preprocessing logic into the format required by the ML model. This logic accommodates additional data transformations and facilitate integration of {partner-product-name} customizations. 
+We do not recommend modifying AWS Lambda function code if your ML model needs additional transformations. The best practice is to package input preprocessing logic alongside the ML model as an SageMaker inference pipeline. For more information, refer to https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[Preprocess input data before making predictions using Amazon SageMaker inference pipelines and Scikit-learn^]. 
 
 == References
 
 === AWS services
-* http://aws.amazon.com/documentation/acm/[AWS Certificate Manager]
-* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation]
-* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway]
-* https://docs.aws.amazon.com/lambda/[AWS Lambda]
-* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
-* https://docs.aws.amazon.com/sagemaker/[Amazon SageMaker]
-* https://docs.aws.amazon.com/cognito/[Amazon Cognito]
-* https://docs.aws.amazon.com/route53/[Amazon Route 53]
+* http://aws.amazon.com/documentation/acm/[AWS Certificate Manager^]
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation^]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway^]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda^]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito^]
+* https://docs.aws.amazon.com/sagemaker/[Amazon SageMaker^]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito^]
+* https://docs.aws.amazon.com/route53/[Amazon Route 53^]
 
 === Quick Start reference deployments
- - https://aws.amazon.com/quickstart/[AWS Quick Start home page]
+ - https://aws.amazon.com/quickstart/[AWS Quick Starts^]
 
 === GitHub repository
-You can visit our https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot[GitHub repository] to download the templates and scripts for this Quick Start, to post your comments, and to share your customizations with others.
+You can visit our https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot[GitHub repository^] to download the templates and scripts for this Quick Start, to post your comments, and to share your customizations with others.

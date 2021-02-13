@@ -4,4 +4,6 @@
 
 This Quick Start deploys a solution that enables Tableau users to blend predictions from Amazon SageMaker hosted models into Tableau-powered visualizations. This deployment works with any Tableau product supported by the https://tableau.github.io/analytics-extensions-api/[Tableau Analytics Extension^], which includes Tableau Desktop and Tableau Server. 
 
-The deployment is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, it supports integration of any machine learning (ML) models hosted by Amazon SageMaker Hosting Services can be integrated with Tableau. For models not trained with Autopilot, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom-model input and output formats.
+The deployment is designed to work with models trained using Amazon SageMaker Autopilot without the need for customizations. However, it supports integration of any machine learning (ML) models hosted by SageMaker hosting services can be integrated with Tableau. For models not trained with Autopilot, you are responsible for implementing transformations required to match the Tableau Analytics Extension and your custom-model input and output formats.
+
+This Quick Start reference deployment guide provides instructions for using AWS CloudFormation templates to deploy a SageMaker Tableau analytic extension.
