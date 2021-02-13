@@ -126,7 +126,7 @@ Parameters:
     Description: Amazon Resource Number (ARN) of the domain certificate.
   HostedZoneId:
     Type: 'AWS::Route53::HostedZone::Id'
-    Description: Domain Route 53 hosted zone.
+    Description: Domain Route 53 hosted zone ID.
 
 Conditions:
   UsingDefaultBucket: !Equals
@@ -188,4 +188,4 @@ Resources:
 Outputs:
   Postdeployment:
     Description: See the deployment guide for post-deployment steps.
-    Value: 
+    Value: https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.sortDate&quickstart-all.sort-order=desc&awsm.page-quickstart-all=5
