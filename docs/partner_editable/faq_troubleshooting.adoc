@@ -13,3 +13,18 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 *Q.* I encountered a size-limitation error when I deployed the AWS CloudFormation templates.
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
+
+*Q.* How do I launch the solution into GovCloud.
+
+*A.* While the Quick Start does not list GovCloud as a supported region, the solution can be deployed into GovCloud with light modifications. The workload template should be modified to remove the Route53 Configuration from the Domain in the API. 
+
+```DomainName: !Ref DomainName
+          CertificateArn: !Ref CertificateARN          
+          EndpointConfiguration: EDGE
+          #Remove from here down
+          Route53: 
+            HostedZoneId: !Ref HostedZoneId```
+
+After modifying the template, you can launch the solution into your AWS account. Once the stack has deployed, navigate to Route 53 and identify the Alias record created for the Custom Domain (this will match the output in your CloudFormation console). Manually modify this record, change it from an Alias record to a CNAME record. For more information about GovCloud and Route 53 please reference the https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[User Guide^]. 
+
+With these modifications, the solution should be accessible from GovCloud. You can test by calling the /info endpoint of your API using the custom domain name. 

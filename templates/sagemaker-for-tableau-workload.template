@@ -98,6 +98,7 @@ Conditions:
     - !Ref LaunchToVpc
     - 'Yes'
   GovCloudCondition: !Or [!Equals [!Ref 'AWS::Region', 'us-gov-west-1'], !Equals [!Ref 'AWS::Region', 'us-gov-east-1']]
+  StandardDeployment: !Not [Condition: GovCloudCondition]
 
 Resources:
   VPCEndpoint:
@@ -233,7 +234,8 @@ Resources:
                 - Authorization
       StageName: prod
       EndpointConfiguration:
-        Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
+        # Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
+        Type: EDGE
       DefinitionBody:
         openapi: "3.0.1"
         info:
@@ -252,7 +254,7 @@ Resources:
                         $ref: "#/components/schemas/Empty"
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InfoFunction.Arn}/invocations"
+                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InfoFunction.Arn}/invocations"
                 responses:
                   default:
                     statusCode: "200"
@@ -273,7 +275,7 @@ Resources:
               - LambdaRequestAuthorizer: []
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EvaluateFunction.Arn}/invocations"
+                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EvaluateFunction.Arn}/invocations"
                 responses:
                   default:
                     statusCode: "200"
@@ -295,19 +297,21 @@ Resources:
               x-amazon-apigateway-authorizer:
                 type: "request"
                 authorizerUri: 
-                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BasicAuthFunction.Arn}/invocations"
+                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BasicAuthFunction.Arn}/invocations"
                 authorizerResultTtlInSeconds: 0
                 identitySource: "method.request.header.Authorization"
       Domain:
-       CertificateArn: !Ref CertificateARN
-       DomainName: !Ref DomainName
-       EndpointConfiguration: REGIONAL
-       Route53:
-        HostedZoneId: !Ref HostedZoneId
+        DomainName: !Ref DomainName
+        CertificateArn: !Ref CertificateARN
+        EndpointConfiguration: REGIONAL
+        Route53:
+          HostedZoneId: !Ref HostedZoneId
+
       Variables:
         InfoFunction: !Ref InfoFunction
         EvaluateFunction: !Ref EvaluateFunction
         DomainName: !Ref DomainName
+
   BasicAuthFunction:
       Type: AWS::Serverless::Function
       Properties:
