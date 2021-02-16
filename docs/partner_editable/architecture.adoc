@@ -9,8 +9,9 @@ image::../images/tableau-sagemaker-endpoint-architecture-diagram.png[Architectur
 As shown in <<architecture1>>, this Quick Start sets up the following:
 
 * A VPC configured according to AWS best practices to provide you with your own virtual network on AWS.
-* Amazon API Gateway to maintain and secure a REST API containing two endpoints (info and evaluate). The API facilitates connection between Tableau and SageMaker.
+* Amazon API Gateway to maintain and secure a REST API with two endpoints (info and evaluate).
+* Two AWS Lambda functions, one for each API Gateway endpoint. When Tableau sends a request (for example, to retrieve a SageMaker inference) API Gateway calls the associated AWS Lambda function.
 * In the Authentication group:
  - An API Gateway AWS Lambda authorizer to control access to REST API resources. When Tableau calls the REST API, API Gateway invokes the AWS Lambda authorizer to validate the caller.
  - Amazon Cognito providing a managed portal for sign-up and sign-in and a user pool to authenticate users.
-* Two AWS Lambda functions, one for each API Gateway endpoint. When Tableau sends a request to an endpoint (for example, to retrieve a SageMaker inference) API Gateway calls the associated AWS Lambda function.
+
