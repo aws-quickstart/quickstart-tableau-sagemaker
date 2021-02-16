@@ -1,8 +1,13 @@
 // Replace the content in <>
 // Briefly describe the software. Use consistent and clear branding. 
 // Include the benefits of using the software on AWS, and provide details on usage scenarios.
-This Quick Start is for users who want to use Amazon SageMaker Autopilot ML models in their Tableau dashboards. The serverless application this Quick Start deploys uses AWS best practices for security and high availability, and includes the following:
+Customers of Tableau can use Amazon SageMaker integration to incorporate the predictions and inferences of SageMaker machine learning models in their Tableau dashboards. This Quick Start deploys a Tableau dashboard extension in the AWS Cloud that receives data from Tableau and returns it after it is augmented and transformed by ML models trained and tuned with Autopilot. It removes the heavy lifting of machine learning and data science from business analysts who want to add predictive analytics to their Tableau visualizations. 
+
+The serverless application this Quick Start deploys uses AWS best practices for security and high availability, and includes the following:
 
 * A REST API to which Tableau can connect.
 * AWS Lambda functions to facilitate connectivity between Autopilot and Tableau.
 * Amazon Cognito for simple and secure user sign-in and authentication.
+
+
+
