@@ -234,8 +234,7 @@ Resources:
                 - Authorization
       StageName: prod
       EndpointConfiguration:
-        # Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
-        Type: EDGE
+        Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
       DefinitionBody:
         openapi: "3.0.1"
         info:
