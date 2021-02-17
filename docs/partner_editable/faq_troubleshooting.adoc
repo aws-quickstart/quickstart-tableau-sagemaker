@@ -14,14 +14,14 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* How do I launch the solution into GovCloud.
+*Q.* How do I launch the solution into GovCloud?
 
-*A.* While the Quick Start does not list GovCloud as a supported Region, it can be deployed into GovCloud with light modifications. In the workload template, modify the endpoint configuration to be Regional and remove the Route 53 configuration from the domain in the API. To do this, 
+*A.* While GovCloud is not listed as a link:#_supported_regions[supported Region], it can be deployed into GovCloud with light modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template: 
 
 * Change the `EndpointConfiguration` parameter to `REGIONAL`.
 * Remove the two lines immediately following the `EndpointConfiguration` parameter.
 
-Before
+Before:
 ----
 DomainName: !Ref DomainName
     CertificateArn: !Ref CertificateARN          
@@ -30,7 +30,7 @@ DomainName: !Ref DomainName
       HostedZoneId: !Ref HostedZoneId
 ----
 
-After
+After:
 
 ----
 DomainName: !Ref DomainName
@@ -39,7 +39,7 @@ DomainName: !Ref DomainName
     
 ----
 
-These changes require a modification to the deployment steps, as your Certificate should now be deployed in the same region as your AWS deployment to support the REGIONAL domain configuration. 
+These changes require a modification to the deployment steps, as your certificate is deployed in the same Region as your AWS deployment to support the Regional domain configuration. 
 
 After modifying the workload template, you can launch the Quick Start into your AWS account. After the stack is deployed, navigate to Route 53 and identify the alias record created for the custom domain (matching the output in your CloudFormation console). Manually modify this record to change it from an alias record to a CNAME record. For more information about GovCloud and Route 53, see https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[Amazon Route 53^]. 
 
