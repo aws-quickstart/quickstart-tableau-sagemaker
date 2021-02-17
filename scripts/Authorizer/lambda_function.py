@@ -127,16 +127,24 @@ class AuthPolicy(object):
         """Adds a method to the internal lists of allowed or denied methods. Each object in
         the internal list contains a resource ARN and a condition statement. The condition
         statement can be null."""
+        session = boto3.session.Session()
+        aws_region = session.region_name
+
         if verb != "*" and not hasattr(HttpVerb, verb):
             raise NameError("Invalid HTTP verb " + verb + ". Allowed verbs in HttpVerb class")
         resourcePattern = re.compile(self.pathRegex)
         if not resourcePattern.match(resource):
             raise NameError("Invalid resource path: " + resource + ". Path should match " + self.pathRegex)
 
+        if aws_region == 'us-gov-west-1' or aws_region == 'us-gov-east-1':
+            arn_partition = 'aws-us-gov'
+        else:
+            arn_partition = 'aws'
+
         if resource[:1] == "/":
             resource = resource[1:]
 
-        resourceArn = ("arn:aws:execute-api:" +
+        resourceArn = ("arn:" + arn_partition + ":execute-api:" +
             self.region + ":" +
             self.awsAccountId + ":" +
             self.restApiId + "/" +
