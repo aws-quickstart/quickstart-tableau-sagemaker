@@ -5,7 +5,7 @@ As shown in <<cfn_outputs>>, the AWS CloudFormation template creates the followi
 
 On the *Resources* tab, you find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the SolutionSG security group as necessary to ensure they conform to your VPC security policies. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
 
-=== Step 3. Test the deployment
+=== Test the deployment
 
 To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, test signing in using the new credentials.
 
@@ -38,7 +38,7 @@ The {partner-product-name} deployment can be called with Tableau SCRIPT_ functio
 `Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
 
 [#tableau_additionalinfo]
-.Calculation syntax for mapping a data source in Tableau to the input schema of an SageMaker hosted model
+.Calculation syntax for mapping a data source in Tableau to the input schema of an SageMaker-hosted model
 [link=images/tableau_calculations.png]
 image::../images/tableau_calculations.png[TableauCalc]
 
