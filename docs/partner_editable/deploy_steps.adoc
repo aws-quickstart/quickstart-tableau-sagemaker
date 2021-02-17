@@ -1,5 +1,5 @@
 
-=== Step 1. Prepare an AWS Account
+=== Prepare an AWS Account
 
 . If you don’t already have an AWS account, create one at http://aws.amazon.com by following the on-screen instructions. 
 
@@ -7,7 +7,7 @@
 
 . Create an SSL Certificate in the us-east-1 Region. To do this, refer to https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html#request-public-console[Request a Public Certificate Using the Console]. 
 
-=== Step 2. Launch the Quick Start
+=== Launch the Quick Start
 
 . Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see link:#_deployment_options[deployment options], earlier in this guide. To deploy without a VPC, choose *Deploy {partner-product-short-name} into an existing VPC on AWS* and set the *Launch to VPC* parameter to *No*.
 
