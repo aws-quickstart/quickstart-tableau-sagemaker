@@ -302,7 +302,7 @@ Resources:
       Domain:
         DomainName: !Ref DomainName
         CertificateArn: !Ref CertificateARN
-        EndpointConfiguration: REGIONAL
+        EndpointConfiguration: EDGE
         Route53:
           HostedZoneId: !Ref HostedZoneId
 
