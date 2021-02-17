@@ -8,13 +8,13 @@ image::../images/tableau-sagemaker-endpoint-architecture-diagram.png[Architectur
 
 As shown in <<architecture1>>, this Quick Start sets up the following:
 
-* Amazon API Gateway with REST API.
+* Amazon API Gateway with REST API containing two endpoints (GET /info and POST /evaluate).
 * In the authentication group:
-** An API Gateway Lambda authorizer to control access to REST API resources.
-** Amazon Cognito to provide a managed portal for sign-up and sign-in of connector users and a user pool for authentication.
+** Amazon Cognito to provide a managed portal for sign-up and sign-in of connector users and a user pool.
+** An API Gateway Lambda authorizer to connect API Gateway to the Amazon Cognito user pool for authentication.
 * A VPC configured according to AWS best practices to provide you with your own virtual network on AWS.*
 * In the VPC:
-** Two AWS Lambda functions, one for each Amazon SageMaker model endpoint (GET /info and POST /evaluate).
+** Two AWS Lambda functions, one for each REST API endpoint (GET /info and POST /evaluate).
 ** A VPC endpoint to provide connection between the VPC and Amazon SageMaker.
 
 *The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.
