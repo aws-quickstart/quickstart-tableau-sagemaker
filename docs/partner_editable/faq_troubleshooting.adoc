@@ -16,15 +16,31 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *Q.* How do I launch the solution into GovCloud.
 
-*A.* While the Quick Start does not list GovCloud as a supported region, the solution can be deployed into GovCloud with light modifications. The workload template should be modified to remove the Route53 Configuration from the Domain in the API, and modify the EndpointConfiguration to be a Regional deployment. These changes require a modification to the deployment steps, as your Certificate should now be deployed in the same region as your AWS deployment to support the REGIONAL domain configuration. 
+*A.* While the Quick Start does not list GovCloud as a supported Region, it can be deployed into GovCloud with light modifications. In the workload template, modify the endpoint configuration to be Regional and remove the Route 53 configuration from the domain in the API. To do this, 
 
-```DomainName: !Ref DomainName
-          CertificateArn: !Ref CertificateARN          
-          EndpointConfiguration: REGIONAL
-          #Remove from here down
-          Route53: 
-            HostedZoneId: !Ref HostedZoneId```
+* Change the `EndpointConfiguration` parameter to `REGIONAL`.
+* Remove the two lines immediately following the `EndpointConfiguration` parameter.
 
-After modifying the template, you can launch the solution into your AWS account. Once the stack has deployed, navigate to Route 53 and identify the Alias record created for the Custom Domain (this will match the output in your CloudFormation console). Manually modify this record, change it from an Alias record to a CNAME record. For more information about GovCloud and Route 53 please reference the https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[User Guide^]. 
+Before
+----
+DomainName: !Ref DomainName
+    CertificateArn: !Ref CertificateARN          
+    EndpointConfiguration: EDGE
+    Route53: 
+      HostedZoneId: !Ref HostedZoneId
+----
 
-With these modifications, the solution should be accessible from GovCloud. You can test by calling the /info endpoint of your API using the custom domain name. 
+After
+
+----
+DomainName: !Ref DomainName
+    CertificateArn: !Ref CertificateARN          
+    EndpointConfiguration: REGIONAL
+    
+----
+
+These changes require a modification to the deployment steps, as your Certificate should now be deployed in the same region as your AWS deployment to support the REGIONAL domain configuration. 
+
+After modifying the workload template, you can launch the Quick Start into your AWS account. After the stack is deployed, navigate to Route 53 and identify the alias record created for the custom domain (matching the output in your CloudFormation console). Manually modify this record to change it from an alias record to a CNAME record. For more information about GovCloud and Route 53, see https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[Amazon Route 53^]. 
+
+With these modifications, the deployment should be accessible from GovCloud. You can test this by calling the /info endpoint of your API using the custom domain name. 
