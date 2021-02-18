@@ -2,17 +2,19 @@ Deploying this Quick Start into a new virtual private cloud (VPC) with default p
 
 :xrefstyle: short
 [#architecture1]
-.Quick Start architecture for Amazon SageMaker Autopilot Tableau connector on AWS
+.Quick Start architecture for {{partner-product-name}} on AWS
 [link=images/tableau-sagemaker-endpoint-architecture-diagram.png]
 image::../images/tableau-sagemaker-endpoint-architecture-diagram.png[Architecture,width=100%,height=100%]
 
 As shown in <<architecture1>>, this Quick Start sets up the following:
 
-* A VPC configured according to AWS best practices to provide you with your own virtual network on AWS.*
-* Amazon API Gateway to maintain and secure a REST API with two Amazon SageMaker endpoints (GET /info and POST /evaluate).
-* Two AWS Lambda functions, one attached to each API Gateway endpoint. When Tableau sends a request to a SageMaker endpoint (for example, to retrieve a SageMaker inference) API Gateway calls the associated AWS Lambda function.
+* Amazon API Gateway with REST API containing two endpoints (info and evaluate).
 * In the authentication group:
- - An API Gateway AWS Lambda authorizer to control access to REST API resources. When Tableau calls the REST API, API Gateway invokes the AWS Lambda authorizer to validate the caller.
- - Amazon Cognito providing a managed portal for sign-up and sign-in and a user pool to authenticate users.
+** Amazon Cognito to provide a managed portal for sign-up and sign-in of connector users and a user pool.
+** An API Gateway Lambda authorizer to connect API Gateway to the Amazon Cognito user pool for authentication.
+* A VPC configured according to AWS best practices to provide you with your own virtual network on AWS.*
+* In the VPC:
+** Two AWS Lambda functions, one for each REST API endpoint (info and evaluate).
+** A VPC endpoint to provide connection between the VPC and Amazon SageMaker.
 
 *The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.

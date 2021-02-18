@@ -53,7 +53,7 @@ Globals:
 Parameters:
   LaunchToVpc:
     Type: String
-    Description: Choose *Yes* to deploy into a VPC. Choose *No* to deploy into the AWS Cloud without a VPC.
+    Description: Choose *Yes* to deploy into a VPC. Choose *No* to deploy without a VPC.
     AllowedValues: 
       - 'Yes'
       - 'No'
@@ -71,7 +71,7 @@ Parameters:
     Description: ARN of domain certificate.
   HostedZoneId:
     Type: 'AWS::Route53::HostedZone::Id'
-    Description: Domain Route 53 hosted zone ID.
+    Description: Route 53 hosted zone ID for the domain.
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: The Quick Start bucket name can include numbers, lowercase
@@ -111,8 +111,6 @@ Conditions:
   LaunchToVpc: !Equals
     - !Ref LaunchToVpc
     - 'Yes'
-  GovCloudCondition: !Or [!Equals [!Ref 'AWS::Region', 'us-gov-west-1'], !Equals [!Ref 'AWS::Region', 'us-gov-east-1']]
-  StandardDeployment: !Not [Condition: GovCloudCondition]
 
 Resources:
   VPCEndpoint:
@@ -247,8 +245,6 @@ Resources:
               Headers:
                 - Authorization
       StageName: prod
-      EndpointConfiguration:
-        Type: !If [GovCloudCondition, 'REGIONAL', 'EDGE']
       DefinitionBody:
         openapi: "3.0.1"
         info:
@@ -267,7 +263,7 @@ Resources:
                         $ref: "#/components/schemas/Empty"
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InfoFunction.Arn}/invocations"
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InfoFunction.Arn}/invocations"
                 responses:
                   default:
                     statusCode: "200"
@@ -288,7 +284,7 @@ Resources:
               - LambdaRequestAuthorizer: []
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EvaluateFunction.Arn}/invocations"
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EvaluateFunction.Arn}/invocations"
                 responses:
                   default:
                     statusCode: "200"
@@ -310,21 +306,19 @@ Resources:
               x-amazon-apigateway-authorizer:
                 type: "request"
                 authorizerUri: 
-                  Fn::Sub: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BasicAuthFunction.Arn}/invocations"
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BasicAuthFunction.Arn}/invocations"
                 authorizerResultTtlInSeconds: 0
                 identitySource: "method.request.header.Authorization"
       Domain:
-        DomainName: !Ref DomainName
-        CertificateArn: !Ref CertificateARN
-        EndpointConfiguration: EDGE
-        Route53:
-          HostedZoneId: !Ref HostedZoneId
-
+       CertificateArn: !Ref CertificateARN
+       DomainName: !Ref DomainName
+       EndpointConfiguration: EDGE
+       Route53:
+        HostedZoneId: !Ref HostedZoneId
       Variables:
         InfoFunction: !Ref InfoFunction
         EvaluateFunction: !Ref EvaluateFunction
         DomainName: !Ref DomainName
-
   BasicAuthFunction:
       Type: AWS::Serverless::Function
       Properties:
@@ -345,5 +339,5 @@ Outputs:
     Description: URL to sign up and sign in users.
     Value: !Join ['',[https://, !Ref UserPoolDomain, .auth., !Ref AWS::Region, ".amazoncognito.com/login?response_type=code&client_id=", !Ref UserPoolTokenClient, "&redirect_uri=" , https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot/blob/main/README.md ]]
   SageMakerTableauApi:
-    Description: "URL for your SageMaker Tableau connector."
+    Description: URL for your SageMaker Tableau connector.
     Value: !Ref DomainName

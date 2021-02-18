@@ -1,22 +1,21 @@
-
 === Prepare an AWS Account
 
 . If you don’t already have an AWS account, create one at http://aws.amazon.com by following the on-screen instructions. 
 
 . Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
 
-Create an SSL Certificate. This certificate must be provisioned in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *provision certificates* or *request a certificate*. In the configuration pane type the domain name you plan to use. (Optional) provision this as a wildcard cert for subdomains. 
+. Create an SSL Certificate. This certificate must be provisioned in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *Provision certificates* or *Request a certificate*. Then, enter the domain name you plan to use. Optionally, use an asterisk (*) to create a wildcard certificate for subdomains. 
 
 === Launch the Quick Start
 
-. Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see link:#_deployment_options[deployment options], earlier in this guide. To deploy without a VPC, choose *Deploy {partner-product-short-name} into an existing VPC on AWS* and set the *Launch to VPC* parameter to *No*.
+. Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see link:#_deployment_options[deployment options], earlier in this guide. To deploy without a VPC, choose *Deploy {partner-product-name} into an existing VPC on AWS* and set the *Launch to VPC* parameter to *No*.
 
 [cols=2*]
 |===
-^|https://fwd.aws/Jgmxd[Deploy {partner-product-short-name} into a new VPC on AWS^]
+^|https://fwd.aws/Jgmxd[Deploy {partner-product-name} into a new VPC on AWS^]
 ^|https://...[View template^]
 
-^|https://fwd.aws/RGvEX[Deploy {partner-product-short-name} into an existing VPC on AWS^]
+^|https://fwd.aws/RGvEX[Deploy {partner-product-name} into an existing VPC on AWS^]
 ^|https://...[View template^]
 |===
 
@@ -24,6 +23,6 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 
 :xrefstyle: short
 [start=2]
-. Check the Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the Quick Start infrastructure is built. The template for this Quick Start is launched in the US-West (Oregon) Region by default. You can also download the templates to use as a starting point for your own implementation.
+. Check the Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the Quick Start infrastructure is built. The template for this Quick Start is launched in the US East (N. Virginia) Region by default. You can also download the templates to use as a starting point for your own implementation.
 . On the *Select Template* page, keep the default setting for the template URL, and then choose *Next*.
 . On the *Specify Details* page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the link:#_parameter_reference[Parameter reference] section of this guide. After reviewing and customizing the parameters, choose *Next*.

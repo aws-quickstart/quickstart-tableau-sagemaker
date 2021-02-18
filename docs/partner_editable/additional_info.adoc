@@ -51,7 +51,7 @@ image::../images/tableau_calculations.png[TableauCalc]
 
 == Customization
 
-We recommend that you use Autopilot trained ML models with this deployment. This Quick Start deploys an AWS Lambda function to translate Tableau analytics extension API calls to a format compatible with SageMaker endpoints trained with Autopilot. To use models that are not trained by Autopilot, you may need to customize the deployment.
+We recommend that you use Autopilot-trained ML models with this deployment. This Quick Start deploys an AWS Lambda function to translate Tableau Analytics Extension API calls to a format compatible with SageMaker endpoints trained with Autopilot. To use models that are not trained by Autopilot, you may need to customize the deployment.
 
 Tableau sends data from the analytics extension in the following format:
 
