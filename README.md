@@ -1,6 +1,6 @@
-# Project README
-=======
 # quickstart-tableau-awssagemaker
+=======
+
 ## Tableau connector with Amazon API Gateway, Amazon Lambda, and Amazon Cognito for Amazon SageMaker 
 
 For architectural details, step-by-step instructions, and customization options, see the [deployment guide](https://...).
