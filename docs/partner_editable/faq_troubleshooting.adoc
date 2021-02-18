@@ -16,10 +16,27 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *Q.* How do I launch the Quick Start into AWS GovCloud (US)?
 
-*A.* While AWS GovCloud (US) isn't listed as a link:#_supported_regions[supported Region], this Quick Start can be deployed into AWS GovCloud (US) with a few modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template: 
+*A.* While AWS GovCloud (US) isn't listed as a link:#_supported_regions[supported Region], this Quick Start can be deployed into AWS GovCloud (US) with a few modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template:
+
+----
+Domain:
+  CertificateArn: !Ref CertificateARN
+  DomainName: !Ref DomainName
+  EndpointConfiguration: EDGE
+  Route53:
+   HostedZoneId: !Ref HostedZoneId
+----
 
 * Change the `EndpointConfiguration` parameter from `EDGE` to `REGIONAL`.
-* Remove `Route53:` and `HostedZoneId:`, the two lines immediately following the `EndpointConfiguration` parameter.
+* Delete `Route53:` and `HostedZoneId:  !Ref HostedZoneId`, the two lines immediately following the `EndpointConfiguration` parameter.
+
+----
+Domain:
+  CertificateArn: !Ref CertificateARN
+  DomainName: !Ref DomainName
+  EndpointConfiguration: REGIONAL
+  
+----
 
 These changes require a modification to the deployment steps, as your certificate is deployed in the same Region as your AWS deployment to support the Regional domain configuration. 
 

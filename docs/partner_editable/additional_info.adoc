@@ -3,8 +3,6 @@ As shown in <<cfn_outputs>>, the following resources display on the *Outputs* ta
 * SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
 * UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
 
-On the *Resources* tab, you find the SolutionSG security group. After testing the deployment, verify that the security group's inbound and outbound rules conform to your VPC security policies. Modify them as needed. For more information, see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
-
 === Test the deployment
 
 To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, sign in with the new credentials.
@@ -25,6 +23,9 @@ Optionally, you can test from Tableau (version 2020.1 or later) by doing the fol
 .Analytics Extension Connection dialog box
 [link=images/tableau_connection.png]
 image::../images/tableau_connection.png[TableauConnection]
+
+After testing verify that the SolutionSG security group's inbound and outbound rules conform to your VPC security policies. Modify them as needed. The SolutionSG security group is found on the *Resources* tab of the CloudFormation console after deploying the stack. For more information, see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
+
 
 = Additional Information
 
