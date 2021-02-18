@@ -1,1 +1,13 @@
-// placeholder
+
+:template_aws_cloudformation_stack:
+:template_aws_cognito_userpool:
+:template_aws_cognito_userpoolclient:
+:template_aws_cognito_userpooldomain:
+:template_aws_ec2_securitygroup:
+:template_aws_ec2_vpcendpoint:
+:template_aws_serverless_api:
+:template_aws_serverless_function:
+:template_cloudformation:
+:template_cognito:
+:template_ec2:
+:template_serverless:
