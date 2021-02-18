@@ -25,4 +25,4 @@ These changes require a modification to the deployment steps, as your certificat
 
 After modifying the workload template, you can launch the Quick Start into your AWS account. After the stack is deployed, navigate to Route 53 and identify the alias record created for the custom domain (matching the output in your CloudFormation console). Manually modify this record to change it from an alias record to a CNAME record. For more information about GovCloud and Route 53, see https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[Amazon Route 53^]. 
 
-With these modifications, the deployment should be accessible from GovCloud. You can test this by calling the /info endpoint of your API using the custom domain name. 
+With these modifications, the deployment should be accessible from GovCloud. You can test this by calling the info endpoint of your API using the custom domain name. 

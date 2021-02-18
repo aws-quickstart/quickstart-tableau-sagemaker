@@ -3,7 +3,7 @@
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|Launch into VPC
-(`LaunchToVpc`)|`**__Requires input__**`|Choose *Yes* to deploy into a VPC. Choose *No* to deploy into the AWS Cloud without a VPC.|VPC ID
+(`LaunchToVpc`)|`**__Requires input__**`|Choose *Yes* to deploy into a VPC. Choose *No* to deploy without a VPC.|VPC ID
 (`VpcId`)|`**__Requires input__**`|ID of the VPC to deploy into.|Subnet IDs
 (`SubnetIds`)|`**__Requires input__**`|ID of the subnet to deploy into.
 |===
@@ -12,14 +12,14 @@
 |===
 |Parameter label (name) |Default value|Description|Domain name
 (`DomainName`)|`**__Requires input__**`|Route 53 hosted domain, with prefix. For example, tableauapi.domain.com.|Hosted zone ID
-(`HostedZoneId`)|`**__Requires input__**`|Domain Route 53 hosted zone ID.|Certificate ARN
+(`HostedZoneId`)|`**__Requires input__**`|Route 53 hosted zone ID for the domain.|Certificate ARN
 (`CertificateARN`)|`**__Requires input__**`|ARN of domain certificate.
 |===
 .AWS Quick Start configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|Quick Start S3 bucket name
-(`QSS3BucketName`)|`aws-quickstart-interworks-tableau-sagemaker-autopilot`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 bucket Region
-(`QSS3BucketRegion`)|`us-west-2`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Quick Start S3 key prefix
-(`QSS3KeyPrefix`)|`quickstart-linux-bastion/`|S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots (.) and forward slash (/) and it should end with a forward slash (/).
+(`QSS3BucketName`)|`aws-quickstart-interworks-tableau-sagemaker-autopilot`|Name of the S3 bucket for your copy of the Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but do not start or end with a hyphen (-). See https://aws-quickstart.github.io/option1.html.|Quick Start S3 bucket Region
+(`QSS3BucketRegion`)|`us-west-2`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See https://aws-quickstart.github.io/option1.html.|Quick Start S3 key prefix
+(`QSS3KeyPrefix`)|`quickstart-linux-bastion/`|S3 key prefix that is used to simulate a directory for your copy of the Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html and https://aws-quickstart.github.io/option1.html.
 |===
