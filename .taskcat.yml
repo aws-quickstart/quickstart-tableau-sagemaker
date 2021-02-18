@@ -1,5 +1,5 @@
 project:
-  name: quickstart-interworks-tableau-sagemaker-autopilot
+  name: quickstart-tableau-sagemaker
   regions:
   - us-east-1
   - us-east-2
