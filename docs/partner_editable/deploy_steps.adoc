@@ -2,7 +2,7 @@
 
 . If you don’t already have an AWS account, create one at http://aws.amazon.com by following the on-screen instructions. 
 
-. Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start on AWS. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
+. Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
 
 . Create an SSL Certificate. This certificate must be provisioned in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *Provision certificates* or *Request a certificate*. Then, enter the domain name you plan to use. Optionally, use an asterisk (*) to create a wildcard certificate for subdomains. 
 

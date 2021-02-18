@@ -14,9 +14,9 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* How do I launch the Quick Start into AWS GovCloud (US) Regions?
+*Q.* How do I launch the Quick Start into AWS GovCloud (US)?
 
-*A.* While AWS GovCloud (US) Regions are not listed as link:#_supported_regions[supported Regions], this Quick Start can be deployed into a AWS GovCloud (US) Region with a few modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template: 
+*A.* While AWS GovCloud (US) isn't listed as a link:#_supported_regions[supported Region], this Quick Start can be deployed into AWS GovCloud (US) with a few modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template: 
 
 * Change the `EndpointConfiguration` parameter from `EDGE` to `REGIONAL`.
 * Remove `Route53:` and `HostedZoneId:`, the two lines immediately following the `EndpointConfiguration` parameter.
