@@ -18,26 +18,8 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* While GovCloud is not listed as a link:#_supported_regions[supported Region], it can be deployed into GovCloud with light modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template: 
 
-* Change the `EndpointConfiguration` parameter to `REGIONAL`.
-* Remove the two lines immediately following the `EndpointConfiguration` parameter.
-
-Before:
-----
-DomainName: !Ref DomainName
-    CertificateArn: !Ref CertificateARN          
-    EndpointConfiguration: EDGE
-    Route53: 
-      HostedZoneId: !Ref HostedZoneId
-----
-
-After:
-
-----
-DomainName: !Ref DomainName
-    CertificateArn: !Ref CertificateARN          
-    EndpointConfiguration: REGIONAL
-    
-----
+* Change the `EndpointConfiguration` parameter from `EDGE` to `REGIONAL`.
+* Remove `Route53:` and `HostedZoneId:`, the two lines immediately following the `EndpointConfiguration` parameter.
 
 These changes require a modification to the deployment steps, as your certificate is deployed in the same Region as your AWS deployment to support the Regional domain configuration. 
 
