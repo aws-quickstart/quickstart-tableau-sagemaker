@@ -1,5 +1,4 @@
 # quickstart-tableau-awssagemaker
-=======
 
 ## Tableau connector with Amazon API Gateway, Amazon Lambda, and Amazon Cognito for Amazon SageMaker 
 
