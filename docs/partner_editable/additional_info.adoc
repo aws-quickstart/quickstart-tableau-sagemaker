@@ -1,13 +1,13 @@
-As shown in <<cfn_outputs>>, the AWS CloudFormation template creates the following resources on the *Outputs* tab:
+As shown in <<cfn_outputs>>, the following resources display on the *Outputs* tab after deploying the Quick Start:
 
 * SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
 * UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
 
-On the *Resources* tab, you find the SolutionSG security group. This security group is public by default. After testing the deployment, edit the inbound and outbound rules of the SolutionSG security group as necessary to ensure they conform to your VPC security policies. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
+On the *Resources* tab, you find the SolutionSG security group. After testing the deployment, verify that the security group's inbound and outbound rules conform to your VPC security policies. Modify them as needed. For more information, see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
 
 === Test the deployment
 
-To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, test signing in using the new credentials.
+To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, sign in with the new credentials.
 
 Optionally, you can test from Tableau (version 2020.1 or later) by doing the following:
 
@@ -16,7 +16,7 @@ Optionally, you can test from Tableau (version 2020.1 or later) by doing the fol
 . For *Select an Analytics Extension*, choose *TabPy/External API*.
 . Choose a server from the dropdown list.
 . For *Port*, enter *443*.
-. Select *Sign in with a username and password*, then enter your credentials in the fields provided.
+. Select *Sign in with a username and password*, then enter your user name and password.
 . Select *Require SSL*.
 . Choose *Test Connection*.
 . Click *OK*. If successful, the message *Successfully connected to the analytics extension* displays. If unsuccessful, an error message displays.
@@ -31,29 +31,27 @@ image::../images/tableau_connection.png[TableauConnection]
 == Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-While using the {partner-product-name} deployment, it is important to follow Tableau Desktop and SageMaker best practices. You can use any ML model hosted by SageMaker. However, you should pass data from Tableau table calculations to the analytics extension at the granularity level expected by the model (for example, with no aggregation or translation).
+While using the {partner-product-name} deployment, it is important to follow Tableau Desktop and SageMaker best practices. You can use any ML model hosted by SageMaker. However, you should pass data from Tableau's calculated fields to the analytics extension at the granularity expected by the model (for example, with no aggregation or translation).
 
-The {partner-product-name} deployment can be called with Tableau SCRIPT_ functions `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL`. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions^], you can pass a script along with a block of data to an external analytics engine. The syntax for these calculations is as follows:
+This deployment can be called with Tableau `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL` functions. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions^], you can pass a script and block of data to an external analytics engine. Use these functions with the following  syntax:
 
 `Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
 
 [#tableau_additionalinfo]
-.Calculation syntax for mapping a data source in Tableau to the input schema of an SageMaker-hosted model
+.Mapping a Tableau data source to the input schema of a SageMaker-hosted ML model
 [link=images/tableau_calculations.png]
 image::../images/tableau_calculations.png[TableauCalc]
 
 [NOTE]
 ====
-- *Script functions*. The function you use in your calculated field must match the return data type of your SageMaker model.
-- *SageMaker hosted endpoint*. The SageMaker model must have a hosted endpoint.
-- *Fields to pass to model*. You must pass each field in the dataset from Tableau, in the order that the SageMaker model is expecting.
+- The function in your calculated field must match the type of data returned by the SageMaker model.
+- The SageMaker model must have a hosted endpoint.
+- Pass fields in the Tableau dataset in the order expected by the SageMaker model.
 ====
 
 == Customization
 
-We recommend that you use Autopilot-trained ML models with this deployment. This Quick Start deploys an AWS Lambda function to translate Tableau Analytics Extension API calls to a format compatible with SageMaker endpoints trained with Autopilot. To use models that are not trained by Autopilot, you may need to customize the deployment.
-
-Tableau sends data from the analytics extension in the following format:
+We recommend that you use Autopilot-trained ML models with this deployment. To use models that are not trained by Autopilot, you may need to customize the deployment. Tableau sends data from the analytics extension in the following format:
 
 .Tableau analytics extension data format
 
@@ -78,9 +76,9 @@ The AWS Lambda function for the evaluate endpoint is found on the *Resources* ta
 45,blue-collar,married,basic.9y,no,yes,no,telephone,may,mon,225,2,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
 ----
 
-Preprocessing logic transforms data sent by the AWS Lambda function to the SageMaker endpoint into the format required by the SageMaker ML model. This logic accommodates additional data transformations and facilitates integration of {partner-product-short-name} customizations. 
+Preprocessing logic transforms data sent by the AWS Lambda function to the SageMaker endpoint into the format required by the SageMaker ML model. This logic accommodates additional data transformations and facilitates integration of your customizations of this deployment. 
 
-We do not recommend modifying AWS Lambda function code if your ML model needs additional transformations. The best practice is to package input preprocessing logic alongside the ML model as an SageMaker inference pipeline. For more information, refer to https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[Preprocess input data before making predictions using Amazon SageMaker inference pipelines and Scikit-learn^]. 
+We do not recommend modifying AWS Lambda function code if your ML model needs additional transformations. The best practice is to package preprocessing logic with the ML model as an SageMaker inference pipeline. For more information, see https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[Preprocess input data before making predictions using Amazon SageMaker inference pipelines and Scikit-learn^]. 
 
 == References
 
