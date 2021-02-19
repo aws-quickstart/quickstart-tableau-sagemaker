@@ -24,5 +24,5 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 :xrefstyle: short
 [start=2]
 . Check the Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the Quick Start infrastructure is built. The template for this Quick Start is launched in the US East (N. Virginia) Region by default. You can also download the templates to use as a starting point for your own implementation.
-. On the *Select Template* page, keep the default setting for the template URL, and then choose *Next*.
+. On the *Create stack* page, keep the default setting for the template URL, and then choose *Next*.
 . On the *Specify Details* page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the link:#_parameter_reference[Parameter reference] section of this guide. After reviewing and customizing the parameters, choose *Next*.
