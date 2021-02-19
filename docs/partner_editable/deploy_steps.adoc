@@ -12,11 +12,11 @@
 
 [cols=2*]
 |===
-^|https://fwd.aws/Jgmxd[Deploy {partner-product-name} into a new VPC on AWS^]
-^|https://...[View template^]
+^|https://fwd.aws/VEPxg[Deploy {partner-product-name} into a new VPC on AWS^]
+^|https://fwd.aws/7ajGN[View template^]
 
-^|https://fwd.aws/RGvEX[Deploy {partner-product-name} into an existing VPC on AWS^]
-^|https://...[View template^]
+^|https://fwd.aws/Rabpz[Deploy {partner-product-name} into an existing VPC on AWS^]
+^|https://fwd.aws/GxAYM[View template^]
 |===
 
 NOTE: You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using this Quick Start. Prices are subject to change. See the pricing pages for each AWS service you use in this Quick Start for full details.
