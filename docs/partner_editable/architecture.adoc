@@ -15,6 +15,6 @@ As shown in <<architecture1>>, this Quick Start sets up the following:
 * A VPC, configured according to AWS best practices, to provide you with your own virtual network on AWS.*
 * In the VPC:
 ** Two lambda functions, one for each REST API endpoint.
-** A VPC endpoint to connect the VPC and SageMaker.
+** A VPC endpoint connected to Amazon SageMaker.
 
 *The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.

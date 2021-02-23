@@ -1,6 +1,6 @@
 // Replace the content in <>
 // Briefly describe the software. Use consistent and clear branding. 
 // Include the benefits of using the software on AWS, and provide details on usage scenarios.
-This Quick Start deploys a REST API managed by Amazon API Gateway, AWS Lambda functions to connect Tableau and SageMaker, and Amazon Cognito for user authentication.
+This Quick Start deploys a REST API managed by Amazon API Gateway, lambda functions to connect Tableau and SageMaker, and Amazon Cognito for user authentication.
 
-The deployment is designed to work with ML models trained with Amazon SageMaker Autopilot without the need for customizations. However, it supports integration of any ML models hosted by SageMaker. You're' responsible for customizing the deployment to match the Tableau Analytics Extension API and your custom-model input and output formats. For more information, see link:#_customization[Customization], later in this guide.
+The deployment is designed to work with ML models trained with Amazon SageMaker Autopilot without the need for customizations. However, it supports integration of any ML models hosted by SageMaker. You're responsible for customizing the deployment to match the Tableau Analytics Extension API and your custom-model input and output formats. For more information, see link:#_customization[Customization], later in this guide.
