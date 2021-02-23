@@ -4,7 +4,7 @@
 
 . Use the Region selector in the navigation bar to choose the AWS Region where you want to deploy the Quick Start. Deploy the Quick Start to the same Region where your SageMaker Autopilot models are deployed. If you have Autopilot models deployed to multiple Regions, the recommended architecture is to deploy an instance of the connector to each Region. 
 
-. Create an SSL Certificate. This certificate must be provisioned in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, select *Provision certificates* or *Request a certificate*. Then, enter the domain name you plan to use. Optionally, use an asterisk (*) to create a wildcard certificate for subdomains. 
+. Create an SSL Certificate. This certificate must be provisioned in the us-east-1 region. To do this, in the navigation pane of the AWS Certificate Manager console, choose *Provision certificates* or *Request a certificate*. Then, enter the domain name you plan to use. Optionally, use an asterisk (*) to create a wildcard certificate for subdomains. 
 
 === Launch the Quick Start
 
@@ -12,11 +12,11 @@
 
 [cols=2*]
 |===
-^|https://fwd.aws/Jgmxd[Deploy {partner-product-name} into a new VPC on AWS^]
-^|https://...[View template^]
+^|https://fwd.aws/VEPxg[Deploy {partner-product-name} into a new VPC on AWS^]
+^|https://fwd.aws/7ajGN[View template^]
 
-^|https://fwd.aws/RGvEX[Deploy {partner-product-name} into an existing VPC on AWS^]
-^|https://...[View template^]
+^|https://fwd.aws/Rabpz[Deploy {partner-product-name} into an existing VPC on AWS^]
+^|https://fwd.aws/GxAYM[View template^]
 |===
 
 NOTE: You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using this Quick Start. Prices are subject to change. See the pricing pages for each AWS service you use in this Quick Start for full details.
@@ -24,5 +24,5 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 :xrefstyle: short
 [start=2]
 . Check the Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the Quick Start infrastructure is built. The template for this Quick Start is launched in the US East (N. Virginia) Region by default. You can also download the templates to use as a starting point for your own implementation.
-. On the *Select Template* page, keep the default setting for the template URL, and then choose *Next*.
+. On the *Create stack* page, keep the default setting for the template URL, and then choose *Next*.
 . On the *Specify Details* page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the link:#_parameter_reference[Parameter reference] section of this guide. After reviewing and customizing the parameters, choose *Next*.
