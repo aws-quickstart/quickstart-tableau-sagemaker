@@ -107,6 +107,7 @@ Conditions:
   LaunchToVpc: !Equals
     - !Ref LaunchToVpc
     - 'Yes'
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
 
 Resources:
   VPCEndpoint:
@@ -183,7 +184,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri:
-        Bucket: !Ref QSS3BucketName
+        Bucket: !If [UsingDefaultBucket, !Ref QSS3BucketName, !Sub '${QSS3BucketName}-${AWS::Region}']
         Key: !Sub "${QSS3KeyPrefix}scripts/Info/Info.zip"
       Handler: lambda_function.lambda_handler
       Events:
@@ -202,7 +203,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri:
-        Bucket: !Ref QSS3BucketName
+        Bucket: !If [UsingDefaultBucket, !Ref QSS3BucketName, !Sub '${QSS3BucketName}-${AWS::Region}']
         Key: !Sub "${QSS3KeyPrefix}scripts/Evaluate/Evaluate.zip"
       Handler: lambda_function.lambda_handler
       Policies:
@@ -319,7 +320,7 @@ Resources:
       Type: AWS::Serverless::Function
       Properties:
         CodeUri:
-          Bucket: !Ref QSS3BucketName
+          Bucket: !If [UsingDefaultBucket, !Ref QSS3BucketName, !Sub '${QSS3BucketName}-${AWS::Region}']
           Key: !Sub "${QSS3KeyPrefix}scripts/Authorizer/Authorizer.zip"
 
         Handler: lambda_function.lambda_handler
