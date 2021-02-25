@@ -107,7 +107,7 @@ Conditions:
   LaunchToVpc: !Equals
     - !Ref LaunchToVpc
     - 'Yes'
-  UsingDefaultBucket: !Equals [!Ref AWS::Region, 'us-east-1']
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
 
 Resources:
   VPCEndpoint:
