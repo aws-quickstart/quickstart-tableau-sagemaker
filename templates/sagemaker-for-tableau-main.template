@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Main SageMaker for Tableau Quick Start for deployment into new VPC.
+Description: Main SageMaker for Tableau Quick Start for deployment into new VPC. (qs-1rkuiofp4)
 Metadata:
   LICENSE: Apache License, Version 2.0 
   QuickStartDocumentation:
