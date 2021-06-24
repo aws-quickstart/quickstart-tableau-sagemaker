@@ -324,7 +324,6 @@ Resources:
           Key: !Sub "${QSS3KeyPrefix}scripts/Authorizer/Authorizer.zip"
 
         Handler: lambda_function.lambda_handler
-        Runtime: python2.7
         Tracing: Active
         Environment:
             Variables:

@@ -50,13 +50,21 @@ def lambda_handler(event, context):
     log.debug("authorization: " + json.dumps(authorization_header))
 
     # Get the username:password hash from the authorization header
-    username_password_hash = authorization_header['authorization'].split()[1]
-    log.debug("username_password_hash: " + username_password_hash)
+    header_auth = authorization_header['authorization'].split()[1]
+    base64_bytes = header_auth.encode('ascii')
+    message_bytes = base64.b64decode(base64_bytes)
 
+    username_password_hash = message_bytes.decode('ascii')
+
+    log.debug("username_password_hash: " + username_password_hash)
+    
     # Decode username_password_hash and get username
-    username = base64.standard_b64decode(username_password_hash).split(':')[0]
+    #username = base64.standard_b64decode(username_password_hash).split(':')[0]
+    username = username_password_hash.split(':')[0]
     log.debug("username: " + username)
-    password = base64.standard_b64decode(username_password_hash).split(':')[1]
+    
+    # Decode username_password_hash and get password
+    password = username_password_hash.split(':')[1]
     log.debug("password: " + password)
     
     # Returns an allow policy on the requested API resource if auth against Cognito is successful
