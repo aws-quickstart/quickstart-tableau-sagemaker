@@ -13,8 +13,7 @@
 // "{partner-company-name}" and "AWS Quick Start team." 
 // Use the comma before "and" only when three or more names.
 :partner-contributors: Holt Calder, InterWorks, and Madeleine Corneli, Tableau Software
-:aws-contributors: Dylan Tong, AWS AI Augmented Analytics
-:quickstart-contributors: Shivansh Singh and Tony Bulding, AWS Quick Start team
+:quickstart-contributors: Dylan Tong, AWS AI Augmented Analytics, Shivansh Singh and Tony Bulding, AWS Quick Start team
 // For deployment_time, use minutes if deployment takes an hour or less, 
 // for example, 30 minutes or 60 minutes. 
 // Use hours for deployment times greater than 60 minutes (rounded to a quarter hour),
