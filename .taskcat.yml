@@ -1,0 +1,24 @@
+project:
+  name: quickstart-tableau-sagemaker
+  regions:
+  - us-east-1
+  - us-east-2
+  - us-west-1
+  - us-west-2
+  - eu-north-1
+  - eu-central-1
+  - eu-west-1
+  - eu-west-2
+  - eu-west-3
+tests:
+  default:
+    template: templates/sagemaker-for-tableau-main.template
+    s3_regional_buckets: true
+    parameters:
+      AvailabilityZones: $[taskcat_getaz_2]
+      DomainName: override
+      CertificateARN: override
+      HostedZoneId: override
+      QSS3KeyPrefix: "quickstart-tableau-sagemaker/"
+      QSS3BucketName: $[taskcat_autobucket]
+      QSS3BucketRegion: $[taskcat_current_region]
