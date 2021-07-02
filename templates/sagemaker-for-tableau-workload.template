@@ -23,7 +23,6 @@ Metadata:
         default: AWS Quick Start configuration
       Parameters:
       - QSS3BucketName
-      - QSS3BucketRegion
       - QSS3KeyPrefix
     ParameterLabels:
       LaunchToVpc: 
@@ -36,8 +35,6 @@ Metadata:
         default: Quick Start S3 key prefix
       QSS3BucketName:
         default: Quick Start S3 bucket name
-      QSS3BucketRegion:
-        default: Quick Start S3 bucket Region
       DomainName:
         default: Domain name
       CertificateARN:
@@ -84,10 +81,6 @@ Parameters:
       Start location. This name can include numbers, lowercase letters, 
       uppercase letters, and hyphens, but do not start or end with a hyphen (-). 
       See https://aws-quickstart.github.io/option1.html.
-    Type: String
-  QSS3BucketRegion:
-    Default: 'us-east-1'
-    Description: AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See https://aws-quickstart.github.io/option1.html.
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^([0-9a-zA-Z-.]+/)*$
@@ -201,6 +194,13 @@ Resources:
           - !If [LaunchToVpc, !Ref SubnetIds, !Ref "AWS::NoValue"]
   EvaluateFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+          ignore_reasons:
+            EIAMPolicyWildcardResource: "Need to invoke all endpoints in account for Tableau integration to function properly"
     Properties:
       CodeUri:
         Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
@@ -322,7 +322,6 @@ Resources:
         CodeUri:
           Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
           Key: !Sub "${QSS3KeyPrefix}scripts/Authorizer/Authorizer.zip"
-
         Handler: lambda_function.lambda_handler
         Tracing: Active
         Environment:
