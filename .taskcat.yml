@@ -19,6 +19,6 @@ tests:
       DomainName: override
       CertificateARN: override
       HostedZoneId: override
-      QSS3KeyPrefix: "quickstart-interworks-tableau-sagemaker-autopilot/"
+      QSS3KeyPrefix: "quickstart-tableau-sagemaker/"
       QSS3BucketName: $[taskcat_autobucket]
       QSS3BucketRegion: $[taskcat_current_region]
