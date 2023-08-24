@@ -2,5 +2,32 @@
 
 For troubleshooting common Partner Solution issues, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^] and https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting CloudFormation^].
 
-// == Resources
-// Uncomment section and add links to any external resources that are specified by the partner.
+*Q.* How do I launch the Partner Solution into AWS GovCloud (US)?
+
+*A.* While AWS GovCloud (US) isn't listed as a link:#_supported_regions[supported Region], this Partner Solution can be deployed into AWS GovCloud (US) with a few modifications to the workload template. To do this, make the following changes to the `SageMakerAPI` section of the workload template:
+
+----
+Domain:
+  CertificateArn: !Ref CertificateARN
+  DomainName: !Ref DomainName
+  EndpointConfiguration: EDGE
+  Route53:
+   HostedZoneId: !Ref HostedZoneId
+----
+
+* Change the `EndpointConfiguration` parameter from `EDGE` to `REGIONAL`.
+* Delete `Route53:` and `HostedZoneId:  !Ref HostedZoneId`, the two lines immediately following the `EndpointConfiguration` parameter.
+
+----
+Domain:
+  CertificateArn: !Ref CertificateARN
+  DomainName: !Ref DomainName
+  EndpointConfiguration: REGIONAL
+  
+----
+
+These changes require a modification to the deployment steps, as your certificate is deployed in the same Region as your AWS deployment to support the Regional domain configuration. 
+
+After modifying the workload template, you can launch the Partner Solution into your AWS account. After the stack is deployed, navigate to Route 53 and identify the alias record created for the custom domain (matching the output in your CloudFormation console). Manually modify this record to change it from an alias record to a CNAME record. For more information about AWS GovCloud (US) and Route 53, see https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-r53.html[Amazon Route 53^]. 
+
+With these modifications, the deployment should be accessible from AWS GovCloud (US). You can test this by calling the info endpoint of your API using the custom domain name. 

@@ -1,3 +1,9 @@
 //Include any predeployment steps here, such as signing up for a Marketplace AMI or making any changes to a partner account. If there are no predeployment steps, leave this file empty.
 
 == Predeployment steps
+
+Before deploying the {partner-product-name} on AWS, you must have the following:
+
+ - An AWS account.
+ - A domain managed by Amazon Route 53.
+ - An SSL certificate managed by AWS Certificate Manager.

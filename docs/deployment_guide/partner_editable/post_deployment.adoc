@@ -1,3 +1,104 @@
 // Include any postdeployment steps here, such as steps necessary to test that the deployment was successful. If there are no postdeployment steps, leave this file empty.
 
 == Postdeployment steps
+
+The following resources display on the *Outputs* tab after deploying the Partner Solution:
+
+* SageMakerTableauApi: The URL for users to connect to the deployment from Tableau.
+* UserPoolDomain: The Amazon Cognito URL to sign up and sign in users of the deployment.
+
+=== Test the deployment
+
+To test the deployment, navigate to the UserPoolDomain URL displayed in the *Outputs* tab, and sign up as a user. Then, sign in with the new credentials.
+
+Optionally, you can test from Tableau (version 2020.1 or later) by doing the following:
+
+[start=1]
+. In Tableau Desktop, choose *Help*, *Settings & Performance*, *Manage Analytics Extension Connection*. 
+. For *Select an Analytics Extension*, choose *TabPy/External API*.
+. Choose a server from the dropdown list.
+. For *Port*, enter *443*.
+. Select *Sign in with a username and password*, then enter your user name and password.
+. Select *Require SSL*.
+. Choose *Test Connection*.
+. Click *OK*. If successful, the message *Successfully connected to the analytics extension* displays. If unsuccessful, an error message displays.
+
+[#tableau2]
+.Analytics Extension Connection dialog box
+[link=images/tableau_connection.png]
+image::../docs/deployment_guide/images/tableau_connection.png[TableauConnection]
+
+After testing verify that the SolutionSG security group's inbound and outbound rules conform to your VPC security policies. Modify them as needed. The SolutionSG security group is found on the *Resources* tab of the CloudFormation console after deploying the stack. For more information, see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[Work with security groups^].
+
+
+= Additional Information
+
+== Best practices for using {partner-product-name} on AWS
+// Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
+
+While using the {partner-product-name} deployment, it is important to follow Tableau Desktop and SageMaker best practices. You can use any ML model hosted by SageMaker. However, you should pass data from Tableau's calculated fields to the analytics extension at the granularity expected by the model (for example, with no aggregation or translation).
+
+This deployment can be called with Tableau `SCRIPT_REAL`, `SCRIPT_STR`, `SCRIPT_INT`, and `SCRIPT_BOOL` functions. With these https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm[table-calculation functions^], you can pass a script and block of data to an external analytics engine. Use these functions with the following  syntax:
+
+`Script_Function (‘[SageMaker Hosted Endpoint]’, <fields in dataset to pass to model>)` 
+
+[#tableau_additionalinfo]
+.Mapping a Tableau data source to the input schema of a SageMaker-hosted ML model
+[link=images/tableau_calculations.png]
+image::../docs/deployment_guide/images/tableau_calculations.png[TableauCalc]
+
+[NOTE]
+====
+- The function in your calculated field must match the type of data returned by the SageMaker model.
+- The SageMaker model must have a hosted endpoint.
+- Pass fields in the Tableau dataset in the order expected by the SageMaker model.
+====
+
+== Customization
+
+We recommend that you use Autopilot-trained ML models with this deployment. To use models that are not trained by Autopilot, you may need to customize the deployment. Tableau sends data from the analytics extension in the following format:
+
+.Tableau analytics extension data format
+
+[source,json]
+----
+{'_arg1': [37, 40, 56, 45, 46, 55, 52, 45], '_arg2': ['services', 'admin.', 'services', 'services', 'blue-collar', 'retired', 'technician', 'blue-collar'], '_arg3': ['married', 'married', 'married', 'married', 'married', 'single', 'married', 'married'], '_arg4': ['high.school', 'basic.6y', 'high.school', 'basic.9y', 'basic.6y', 'high.school', 'basic.9y', 'basic.9y'], '_arg5': ['no', 'no', 'no', 'unknown', 'unknown', 'no', 'no', 'no'], '_arg6': ['yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes'], '_arg7': ['no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'no'], '_arg8': ['telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone', 'telephone'], '_arg9': ['may', 'may', 'may', 'may', 'may', 'may', 'may', 'may'], '_arg10': ['mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon', 'mon'], '_arg11': [226, 151, 307, 198, 440, 342, 1666, 225], '_arg12': [1, 1, 1, 1, 1, 1, 1, 2], '_arg13': [999, 999, 999, 999, 999, 999, 999, 999], '_arg14': [0, 0, 0, 0, 0, 0, 0, 0], '_arg15': ['nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent', 'nonexistent'], '_arg16': [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1], '_arg17': [93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994, 93.994], '_arg18': [-36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4, -36.4], '_arg19': [4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857, 4.857], '_arg20': [5191, 5191, 5191, 5191, 5191, 5191, 5191, 5191]}
+----
+
+The evaluate endpoint's AWS Lambda function contains the function `create_sagemaker_body`. It transforms Tableau JSON into the following comma-separated text output:
+
+.Formatted data for SageMaker Autopilot-trained model
+
+[source,csv]
+----
+37,services,married,high.school,no,yes,no,telephone,may,mon,226,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+40,admin.,married,basic.6y,no,no,no,telephone,may,mon,151,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+56,services,married,high.school,no,no,yes,telephone,may,mon,307,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+45,services,married,basic.9y,unknown,no,no,telephone,may,mon,198,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+46,blue-collar,married,basic.6y,unknown,yes,yes,telephone,may,mon,440,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+55,retired,single,high.school,no,yes,no,telephone,may,mon,342,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+52,technician,married,basic.9y,no,yes,no,telephone,may,mon,1666,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+45,blue-collar,married,basic.9y,no,yes,no,telephone,may,mon,225,2,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+----
+
+The evaluate endpoint's AWS Lambda function is found on the *Resources* tab of the AWS CloudFormation console after stack deployment is complete. It is authored in Python 3.7. 
+
+The preprocessing logic accommodates additional data transformations and facilitates the integration of your customizations of this deployment. We do not recommend modifying AWS Lambda function code itself if your ML model needs additional transformations. The best practice is to package preprocessing logic with the ML model as an SageMaker inference pipeline. For more information, see https://aws.amazon.com/blogs/machine-learning/preprocess-input-data-before-making-predictions-using-amazon-sagemaker-inference-pipelines-and-scikit-learn/[Preprocess input data before making predictions using Amazon SageMaker inference pipelines and Scikit-learn^]. 
+
+== References
+
+=== AWS services
+* http://aws.amazon.com/documentation/acm/[AWS Certificate Manager^]
+* http://aws.amazon.com/documentation/cloudformation/[AWS CloudFormation^]
+* https://docs.aws.amazon.com/apigateway/[Amazon API Gateway^]
+* https://docs.aws.amazon.com/lambda/[AWS Lambda^]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito^]
+* https://docs.aws.amazon.com/sagemaker/[Amazon SageMaker^]
+* https://docs.aws.amazon.com/cognito/[Amazon Cognito^]
+* https://docs.aws.amazon.com/route53/[Amazon Route 53^]
+
+=== Partner Solution reference deployments
+ - https://aws.amazon.com/quickstart/[AWS Partner Solutions^]
+
+=== GitHub repository
+You can visit our https://github.com/aws-quickstart/quickstart-interworks-tableau-sagemaker-autopilot[GitHub repository^] to download the templates and scripts for this Partner Solution, to post your comments, and to share your customizations with others.
